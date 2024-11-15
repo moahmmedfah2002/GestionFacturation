@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="244.0" prefWidth="311.0" spacing="20.0" style="-fx-background-color: #e7c6fa;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Login">
+<VBox alignment="CENTER" prefHeight="244.0" prefWidth="311.0" spacing="20.0" style="-fx-background-color: #54aeba;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Login">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <Pane prefHeight="306.0" prefWidth="247.0" style="-fx-background-color: #e7c6fa; -fx-border-radius: 30%;">
+      <Pane prefHeight="306.0" prefWidth="247.0" style="-fx-background-color: #54aeba; -fx-border-radius: 30%;">
          <children>
             <Label layoutX="94.0" layoutY="4.0" text="LOG-IN" textFill="#7b2d76">
                <font>
@@ -29,7 +29,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button layoutX="110.0" layoutY="157.0" mnemonicParsing="false" style="-fx-background-color: #d688fe;" text="LOG-IN">
+            <Button layoutX="110.0" layoutY="157.0" mnemonicParsing="false" style="-fx-background-color: #a4ecf5;" text="LOG-IN">
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
