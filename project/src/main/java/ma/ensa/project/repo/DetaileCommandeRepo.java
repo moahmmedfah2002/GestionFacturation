@@ -5,10 +5,10 @@ import ma.ensa.project.entity.Commande;
 import java.util.List;
 
 public interface DetaileCommandeRepo {
-    boolean addCommande(Commande commande);
-    boolean updateCommande(Commande commande);
-    boolean deleteCommande(Commande commande);
-    Commande getCommande(int id);
-    List<Commande> getCommandes();
+    boolean addDetaileCommande(Commande commande);
+    boolean updateDetaileCommande(Commande commande);
+    boolean deleteDetaileCommande(Commande commande);
+    Commande getDetaileCommande(int id);
+    List<Commande> getDetaileCommandes();
 
 }

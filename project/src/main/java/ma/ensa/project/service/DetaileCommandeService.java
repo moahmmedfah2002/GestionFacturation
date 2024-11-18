@@ -1,33 +1,42 @@
 package ma.ensa.project.service;
 
+import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Commande;
 import ma.ensa.project.repo.DetaileCommandeRepo;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class DetaileCommandeService implements DetaileCommandeRepo {
+    private Connexion connexion;
+    private Connection con;
+
+    public DetaileCommandeService() {
+        connexion=new Connexion();
+        con=connexion.getCon();
+    }
     @Override
-    public boolean addCommande(Commande commande) {
+    public boolean addDetaileCommande(Commande commande) {
         return false;
     }
 
     @Override
-    public boolean updateCommande(Commande commande) {
+    public boolean updateDetaileCommande(Commande commande) {
         return false;
     }
 
     @Override
-    public boolean deleteCommande(Commande commande) {
+    public boolean deleteDetaileCommande(Commande commande) {
         return false;
     }
 
     @Override
-    public Commande getCommande(int id) {
+    public Commande getDetaileCommande(int id) {
         return null;
     }
 
     @Override
-    public List<Commande> getCommandes() {
+    public List<Commande> getDetaileCommandes() {
         return List.of();
     }
 }

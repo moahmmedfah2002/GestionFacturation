@@ -13,8 +13,8 @@ import java.util.List;
 
 public class CommandeService implements CommandeRepo {
 
-    Connexion connexion;
-    Connection con;
+    private Connexion connexion;
+    private Connection con;
     public CommandeService() throws SQLException, ClassNotFoundException {
         connexion=new Connexion();
         con=connexion.getCon();
