@@ -1,57 +1,76 @@
 package ma.ensa.project.entity;
 
-
-
 import java.time.LocalDate;
+import java.util.List;
 
 public class Facture {
-    public void setClientId(int clientId) {
+    private int id;
+    private Long clientId;  // Id du client
+    private double montant;
+    private String statut;
+    private LocalDate date;
+    private double tva;
+    private double rabais;
+    private List<Produit> produits;  // Liste des produits associés à la facture
+
+    // Constructeur
+    public Facture(int id, Long clientId, double montant, String statut, LocalDate date, double tva, double rabais) {
+        this.id = id;
+        this.clientId = clientId;
+        this.montant = montant;
+        this.statut = statut;
+        this.date = date;
+        this.tva = tva;
+        this.rabais = rabais;
+    }
+
+    // Getters et Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 
-    private int id;
+    public double getMontant() {
+        return montant;
+    }
 
     public void setMontant(double montant) {
         this.montant = montant;
+    }
+
+    public String getStatut() {
+        return statut;
     }
 
     public void setStatut(String statut) {
         this.statut = statut;
     }
 
-    public int getClientId() {
-        return clientId;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDatecreation(LocalDate datecreation) {
-        this.datecreation = datecreation;
-    }
-
-    private int clientId;
-
-    public double getMontant() {
-        return montant;
-    }
-
-    private double montant;
-
-    public String getStatut() {
-        return statut;
-    }
-
-    private String statut;
-
-    public LocalDate getDatecreation() {
-        return datecreation;
-    }
-
-    private LocalDate datecreation;
-    public Facture (){
-
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public double getTva() {
         return tva;
+    }
+
+    public void setTva(double tva) {
+        this.tva = tva;
     }
 
     public double getRabais() {
@@ -62,74 +81,17 @@ public class Facture {
         this.rabais = rabais;
     }
 
-    private double rabais;
-
-    public void setTva(double tva) {
-        this.tva = tva;
+    public List<Produit> getProduits() {
+        return produits;
     }
 
-    private double tva;
-
-    public  Facture(int id, int clientId, double montant, String status, LocalDate datecreation){
-        this.id=id;
-        this.clientId= clientId;
-        this.montant= montant;
-        this.statut= status;
-        this.datecreation= datecreation;
-        this.tva=tva;
-        this.rabais=rabais;;
-    }
-    public int getId(){
-        return id;
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    // Méthode pour calculer le montant total
+    public double calculerMontantTotal() {
+        double montantTotal = montant + (montant * tva) - rabais;
+        return montantTotal;
     }
-    //
-    public double calculerMontantTotal(){
-        double montantTVA = montant * (tva / 100);
-        double monatantRabais = montant * (rabais  / 100);
-        return montant + montantTVA - monatantRabais;
-
-    }
-    public boolean validerFacture(){
-        if (clientId <= 0){
-            System.out.println("ID client invalid");
-            return false;
-
-        }
-        if (montant <= 0){
-            System.out.println("le montant doit etre superieur a 0");
-            return false;
-
-        }
-        if (tva < 0 || rabais < 0){
-            System.out.println("les valeur de tva et de rabais doit etre positive");
-            return false;
-
-        }
-        if (datecreation == null || datecreation.isAfter(LocalDate.now())){
-            System.out.println("Date de creation invalide.");
-            return false;
-        }
-        return true;
-
-    }
-
-
-    public String toString(){
-        return "Facture{" +"id="+ id +
-                ", clientId=" +clientId+
-                ", montant=" +montant+
-                ",statu='" +statut+'\''+
-                ",satecreation="+datecreation+
-                ", tva=" + tva +
-                ", rabais=" + rabais +
-                ", montantTotal=" + calculerMontantTotal() +'}';
-    }
-
 }
-
-
-
