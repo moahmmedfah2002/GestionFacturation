@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="244.0" prefWidth="311.0" spacing="20.0" style="-fx-background-color: #54aeba;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Login">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <children>
+      <Pane prefHeight="306.0" prefWidth="247.0" style="-fx-background-color: #54aeba; -fx-border-radius: 30%;">
+         <children>
+            <Label layoutX="94.0" layoutY="4.0" text="LOG-IN" textFill="#7b2d76">
+               <font>
+                  <Font name="Georgia Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField layoutX="61.0" layoutY="68.0" style="-fx-opacity: 0.8;" />
+            <TextField layoutX="62.0" layoutY="120.0" style="-fx-opacity: 0.8;" />
+            <Label layoutX="61.0" layoutY="46.0" text="username">
+               <font>
+                  <Font name="Georgia Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="61.0" layoutY="97.0" text="password">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button layoutX="110.0" layoutY="157.0" mnemonicParsing="false" style="-fx-background-color: #a4ecf5;" text="LOG-IN">
+               <font>
+                  <Font name="Georgia" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+
+</VBox>
