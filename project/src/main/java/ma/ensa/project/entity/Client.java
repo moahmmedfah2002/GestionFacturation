@@ -1,5 +1,14 @@
 package ma.ensa.project.entity;
 
+
+import ma.ensa.project.Connection;
+import ma.ensa.project.repo.ClientRepo;
+
+
+import java.util.ArrayList;
+
+
+
 import java.util.List;
 
 public class Client {
@@ -69,4 +78,5 @@ public class Client {
     public void setFactures(List<Facture> factures) {
         this.factures = factures;
     }
+
 }

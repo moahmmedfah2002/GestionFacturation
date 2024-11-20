@@ -4,6 +4,7 @@ module ma.ensa.project {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens ma.ensa.project to javafx.fxml;
     exports ma.ensa.project;
