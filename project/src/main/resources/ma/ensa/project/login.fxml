@@ -12,11 +12,12 @@
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefHeight="345.0" prefWidth="541.0" spacing="20.0" style="-fx-background-color: #e7c6fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Login">
+
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <Pane prefHeight="306.0" prefWidth="247.0" style="-fx-background-color: #e7c6fa; -fx-border-radius: 30%;">
+      <Pane prefHeight="306.0" prefWidth="247.0" style="-fx-background-color: #54aeba; -fx-border-radius: 30%;">
          <children>
             <Label layoutX="265.0" layoutY="14.0" text="LOG-IN" textFill="#f23071">
                <font>
@@ -35,7 +36,9 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+
             <Button layoutX="309.0" layoutY="212.0" mnemonicParsing="false" style="-fx-background-color: #d688fe;" text="LOG-IN">
+
                <font>
                   <Font name="Georgia" size="12.0" />
                </font>
