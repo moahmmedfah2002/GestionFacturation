@@ -1,59 +1,48 @@
 package ma.ensa.project.service;
 
-import java.time.LocalDate;
+import ma.ensa.project.entity.Client;
+import ma.ensa.project.entity.Facture;
+import ma.ensa.project.entity.Produit;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FactureService {
-    private List<Facture> factures; // Simule une base de données pour les factures
 
+    // Liste des factures
+    private List<Facture> factures;
+
+    // Constructeur
     public FactureService() {
         this.factures = new ArrayList<>();
     }
 
     // Méthode pour créer une facture
-    public Facture creerFacture(int clientId, double montant, double tva, double rabais) {
-        Facture nouvelleFacture = new Facture();
-        nouvelleFacture.setId(factures.size() + 1); // Génération d'un ID unique
-        nouvelleFacture.setClientId(clientId);
-        nouvelleFacture.setMontant(montant);
-        nouvelleFacture.setTva(tva);
-        nouvelleFacture.setRabais(rabais);
-        nouvelleFacture.setStatut("En attente");
-        nouvelleFacture.setDatecreation(LocalDate.now());
-
-        // Validation de la facture avant ajout
-        if (!nouvelleFacture.validerFacture()) {
-            System.out.println("Erreur : Facture invalide. Création annulée.");
-            return null;
-        }
-
-        // Ajout à la liste des factures
+    public Facture creerFacture(Client client, List<Produit> produits, double tva, double rabais) {
+        int id = factures.size() + 1; // Génération d'un ID unique
+        double montantBrut = calculerMontantBrut(produits);
+        // Créer la facture avec TVA et rabais
+        Facture nouvelleFacture = new Facture(id, client.getId(), montantBrut, "En attente", java.time.LocalDate.now(), tva, rabais);
         factures.add(nouvelleFacture);
-        System.out.println("Facture créée avec succès : " + nouvelleFacture);
+        System.out.println("Facture créée avec succès : " + nouvelleFacture.getId());
         return nouvelleFacture;
     }
 
     // Méthode pour mettre à jour une facture
-    public Facture mettreAJourFacture(int id, Double nouveauMontant, Double nouvelleTva, Double nouveauRabais, String nouveauStatut) {
+    public Facture mettreAJourFacture(int id, List<Produit> nouveauxProduits, double tva, double rabais) {
         for (Facture facture : factures) {
             if (facture.getId() == id) {
-                if (nouveauMontant != null) facture.setMontant(nouveauMontant);
-                if (nouvelleTva != null) facture.setTva(nouvelleTva);
-                if (nouveauRabais != null) facture.setRabais(nouveauRabais);
-                if (nouveauStatut != null) facture.setStatut(nouveauStatut);
-
-                // Validation de la facture après modification
-                if (!facture.validerFacture()) {
-                    System.out.println("Erreur : Facture invalide après mise à jour.");
-                    return null;
-                }
-
-                System.out.println("Facture mise à jour avec succès : " + facture);
+                double montantBrut = calculerMontantBrut(nouveauxProduits);
+                // Mettre à jour la facture
+                facture.setProduits(nouveauxProduits);
+                facture.setMontant(montantBrut);
+                facture.setTva(tva);
+                facture.setRabais(rabais);
+                System.out.println("Facture mise à jour avec succès : " + facture.getId());
                 return facture;
             }
         }
-        System.out.println("Erreur : Facture avec ID " + id + " non trouvée.");
+        System.out.println("Facture non trouvée pour l'ID : " + id);
         return null;
     }
 
@@ -62,27 +51,33 @@ public class FactureService {
         for (Facture facture : factures) {
             if (facture.getId() == id) {
                 factures.remove(facture);
-                System.out.println("Facture supprimée avec succès : " + facture);
+                System.out.println("Facture supprimée avec succès : " + id);
                 return true;
             }
         }
-        System.out.println("Erreur : Facture avec ID " + id + " non trouvée.");
+        System.out.println("Facture non trouvée pour l'ID : " + id);
         return false;
     }
 
     // Méthode pour afficher toutes les factures
-    public List<Facture> getToutesLesFactures() {
-        return factures;
-    }
-
-    // Méthode pour rechercher une facture par ID
-    public Facture rechercherFactureParId(int id) {
-        for (Facture facture : factures) {
-            if (facture.getId() == id) {
-                return facture;
+    public void afficherFactures() {
+        if (factures.isEmpty()) {
+            System.out.println("Aucune facture n'a été créée.");
+        } else {
+            for (Facture facture : factures) {
+                System.out.println("Facture ID: " + facture.getId() +
+                        ", Total: " + facture.calculerMontantTotal() +
+                        ", Statut: " + facture.getStatut());
             }
         }
-        System.out.println("Erreur : Facture avec ID " + id + " non trouvée.");
-        return null;
+    }
+
+    // Méthode utilitaire pour calculer le montant brut (sans TVA ni rabais)
+    private double calculerMontantBrut(List<Produit> produits) {
+        double total = 0.0;
+        for (Produit produit : produits) {
+            total += produit.getPrix();
+        }
+        return total;
     }
 }
