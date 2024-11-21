@@ -24,7 +24,7 @@ public class CommandeService implements CommandeRepo {
     public boolean addCommande(Commande commande) throws SQLException {
 
         PreparedStatement ps=con.prepareCall("INSERT INTO Commande('date','idClient') VALUES (?,?)");
-        ps.setDate(1,commande.getDate());
+        ps.setDate(1,commande.getCommandeDate());
         ps.setInt(2,commande.getClient());
         int count = ps.executeUpdate();
         if(count>0){
@@ -44,9 +44,9 @@ public class CommandeService implements CommandeRepo {
         ResultSet rs=ps.executeQuery();
         Commande commande=new Commande();
         while(rs.next()){
-            commande.setId(rs.getInt("id");
-            commande.setCommandedate(rs.getDate("commandedate"));
-            commande.setTotalamount(rs.getFloat("Totalamount"));
+            commande.setId(rs.getInt("id"));
+            commande.setCommandeDate(rs.getDate("commandedate"));
+            commande.setTotalAmount(rs.getFloat("Totalamount"));
             commande.setClient(rs.getInt("idClient"));
 
         }
@@ -61,8 +61,8 @@ public class CommandeService implements CommandeRepo {
         while(rs.next()){
             Commande commande=new Commande();
             commande.setId(rs.getInt("id"));
-            commande.setCommandedate(rs.getDate("commandedate"));
-            commande.setTotalamount(rs.getFloat("Totalamount"));
+            commande.setCommandeDate(rs.getDate("commandedate"));
+            commande.setTotalAmount(rs.getFloat("Totalamount"));
             commande.setClient(rs.getInt("idClient"));
             commandes.add(commande);
         }
@@ -73,8 +73,8 @@ public class CommandeService implements CommandeRepo {
     public boolean updateCommande(Commande commande) throws SQLException {
         PreparedStatement ps=con.prepareCall("UPDATE Commande set commandedate=?,Totalamount=?,idClient=? where id=?");
 
-        ps.setDate(1,commande.getDate());
-        ps.setFloat(2,commande.getTotalamount());
+        ps.setDate(1,commande.getCommandeDate());
+        ps.setFloat(2,commande.getTotalAmount());
         ps.setInt(3,commande.getClient());
         ps.setInt(4,commande.getId());
         int count = ps.executeUpdate();
@@ -89,7 +89,7 @@ public class CommandeService implements CommandeRepo {
     public boolean deleteCommande(int id) throws SQLException {
         PreparedStatement ps=con.prepareCall("Delete from Commande where id=?");
 
-
+        Commande commande=this.getCommande(id);
         ps.setInt(1,commande.getId());
         int count = ps.executeUpdate();
         if(count>0){

@@ -1,15 +1,16 @@
 package ma.ensa.project.entity;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class Commande {
     private int id;
     private Date commandeDate;
-    private int totalAmount;
-    private Client client;
-    private List<DetailCommande> detailCommande;
+    private float totalAmount;
+    private int client;
+    private List<Integer> detailCommande;
 
-    public Commande(int id, Date commandeDate, int totalAmount, Client client, List<DetailCommande> detailCommande) {
+    public Commande() {}
+    public Commande(int id, Date commandeDate, float totalAmount, int client, List<Integer> detailCommande) {
         this.id = id;
         this.commandeDate = commandeDate;
         this.totalAmount = totalAmount;
@@ -24,7 +25,7 @@ public class Commande {
         this.id = id;
     }
 
-    public Date getCommandeDate() {
+    public java.sql.Date getCommandeDate() {
         return commandeDate;
     }
 
@@ -32,27 +33,27 @@ public class Commande {
         this.commandeDate = commandeDate;
     }
 
-    public int getTotalAmount() {
+    public float getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(float totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Client getClient() {
+    public int getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(int client) {
         this.client = client;
     }
 
-    public List<DetailCommande> getDetailCommande() {
+    public List<Integer> getDetailCommande() {
         return detailCommande;
     }
 
-    public void setDetailCommande(List<DetailCommande> detailCommande) {
+    public void setDetailCommande(List<Integer> detailCommande) {
         this.detailCommande = detailCommande;
     }
 }
