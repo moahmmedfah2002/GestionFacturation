@@ -5,13 +5,14 @@ import ma.ensa.project.entity.Commande;
 import ma.ensa.project.repo.DetaileCommandeRepo;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class DetaileCommandeService implements DetaileCommandeRepo {
     private Connexion connexion;
     private Connection con;
 
-    public DetaileCommandeService() {
+    public DetaileCommandeService() throws SQLException, ClassNotFoundException {
         connexion=new Connexion();
         con=connexion.getCon();
     }

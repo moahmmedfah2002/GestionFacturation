@@ -29,7 +29,7 @@ public class ProduitService implements ProduitRepo {
         PreparedStatement pstmt=con.prepareStatement(sql);
         pstmt.setString(1,p.getNom());
         pstmt.setDouble(2,p.getPrix());
-        pstmt.setInt(3,p.getQuantitedisponible());
+        pstmt.setInt(3,p.getQuantiteDisponible());
         pstmt.executeUpdate();
 
 
@@ -39,9 +39,9 @@ public class ProduitService implements ProduitRepo {
     public void updateProduit(Produit p) throws SQLException {
         String sql="Update Produit set name=?,prix=?,quantitedisponible=? where id=?";
         PreparedStatement str = con.prepareStatement(sql);
-        str.setString(1,p.getName());
+        str.setString(1, p.getNom());
         str.setDouble(2,p.getPrix());
-        str.setInt(3,p.getQuantitedisponible());
+        str.setInt(3,p.getQuantiteDisponible());
         str.setInt(4,p.getId());
         str.executeUpdate();
 
@@ -70,11 +70,11 @@ public class ProduitService implements ProduitRepo {
           int idpro=  rs.getInt("id");
           p.setId(idpro);
         String name=    rs.getString("nom");
-        p.setName(name);
+        p.setNom(name);
        double prix=     rs.getDouble("prix");
        p.setPrix(prix);
         int quantity=    rs.getInt("quantitedisponible");
-        p.setQuantitedisponible(quantity);
+        p.setQuantiteDisponible(quantity);
 
 
         }

@@ -1,7 +1,7 @@
 package ma.ensa.project.service;
 
 
-import ma.ensa.project.Connection;
+import ma.ensa.project.Connexion;
 import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Client;
 import ma.ensa.project.repo.ClientRepo;
@@ -33,9 +33,9 @@ public class ClientService implements ClientRepo {
             int idclient = rs.getInt("id");
             c.setId(idclient);
             String name=rs.getString("nom");
-            c.setName(name);
+            c.setNom(name);
             String address=rs.getString("address");
-            c.setAddress(address);
+            c.setAdresse(address);
             String email=rs.getString("email");
             c.setEmail(email);
             String telephone=rs.getString("telephone");
@@ -79,8 +79,8 @@ public class ClientService implements ClientRepo {
 
         String sql="insert into Client(name,address,email,telephone) values(?,?,?,?)";
         PreparedStatement str=con.prepareStatement(sql);
-        str.setString(1,client.getName());
-        str.setString(2,client.getAddress());
+        str.setString(1,client.getNom());
+        str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
         str.executeUpdate();}
@@ -94,8 +94,8 @@ public class ClientService implements ClientRepo {
     public void updateClient(Client client) throws SQLException {
      String sql="Update Client set name=?,address=?,email=?,telephone=? where id="+client.getId();
         PreparedStatement str= con.prepareStatement(sql);
-        str.setString(1,client.getName());
-        str.setString(2,client.getAddress());
+        str.setString(1,client.getNom());
+        str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
         str.executeUpdate();
@@ -134,9 +134,9 @@ public class ClientService implements ClientRepo {
             int idclient=rs.getInt("id");
             c.setId(idclient);
             String name=rs.getString("nom");
-            c.setName(name);
+            c.setNom(name);
             String address=rs.getString("address");
-            c.setAddress(address);
+            c.setAdresse(address);
             String emailclient=rs.getString("email");
             c.setEmail(emailclient);
             String telephone=rs.getString("telephone");
