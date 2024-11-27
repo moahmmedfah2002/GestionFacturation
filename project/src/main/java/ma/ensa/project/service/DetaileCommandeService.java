@@ -2,6 +2,7 @@ package ma.ensa.project.service;
 
 import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Commande;
+import ma.ensa.project.entity.DetaileCommande;
 import ma.ensa.project.repo.DetaileCommandeRepo;
 
 import java.sql.Connection;
@@ -17,27 +18,27 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
         con=connexion.getCon();
     }
     @Override
-    public boolean addDetaileCommande(Commande commande) {
+    public boolean addDetaileCommande(DetaileCommande detailecommande) {
         return false;
     }
 
     @Override
-    public boolean updateDetaileCommande(Commande commande) {
+    public boolean updateDetaileCommande(DetaileCommande detaileCommande) {
         return false;
     }
 
     @Override
-    public boolean deleteDetaileCommande(Commande commande) {
+    public boolean deleteDetaileCommande(int id) {
         return false;
     }
 
     @Override
-    public Commande getDetaileCommande(int id) {
+    public DetaileCommande getDetaileCommande(int id) {
         return null;
     }
 
     @Override
-    public List<Commande> getDetaileCommandes() {
+    public List<DetaileCommande> getDetaileCommandes() {
         return List.of();
     }
 }

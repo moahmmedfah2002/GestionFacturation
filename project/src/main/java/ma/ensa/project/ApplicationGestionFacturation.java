@@ -12,12 +12,8 @@ import java.io.IOException;
 public class ApplicationGestionFacturation extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ma/ensa/project/home.fxml"));
-        Scene scene = new Scene(loader.load());
-        primaryStage.setTitle("Application Home");
-        primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+       Login login = new Login();
+       login.initialize(primaryStage);
     }
 
     public static void main(String[] args) {

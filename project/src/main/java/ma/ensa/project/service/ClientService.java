@@ -2,7 +2,6 @@ package ma.ensa.project.service;
 
 
 import ma.ensa.project.Connexion;
-import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Client;
 import ma.ensa.project.repo.ClientRepo;
 
