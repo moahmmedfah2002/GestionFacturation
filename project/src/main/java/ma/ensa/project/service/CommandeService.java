@@ -89,6 +89,7 @@ public class CommandeService implements CommandeRepo {
         ps.setFloat(2,commande.getTotalAmount());
         ps.setInt(3,commande.getClient());
         ps.setInt(4,commande.getId());
+
         int count = ps.executeUpdate();
         if(count>0){
             return true;

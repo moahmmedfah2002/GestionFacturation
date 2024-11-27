@@ -3,13 +3,14 @@ package ma.ensa.project.repo;
 import ma.ensa.project.entity.Commande;
 import ma.ensa.project.entity.DetaileCommande;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface DetaileCommandeRepo {
-    boolean addDetaileCommande(DetaileCommande detaileCommande);
-    boolean updateDetaileCommande(DetaileCommande DetaileCommande);
-    boolean deleteDetaileCommande(int id);
-    DetaileCommande getDetaileCommande(int id);
-    List<DetaileCommande> getDetaileCommandes();
+    boolean addDetaileCommande(DetaileCommande detaileCommande) throws SQLException;
+    boolean updateDetaileCommande(DetaileCommande DetaileCommande) throws SQLException;
+    boolean deleteDetaileCommande(int id) throws SQLException;
+    DetaileCommande getDetaileCommande(int id) throws SQLException;
+    List<DetaileCommande> getDetaileCommandes() throws SQLException;
 
 }
