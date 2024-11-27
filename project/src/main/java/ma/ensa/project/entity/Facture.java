@@ -21,7 +21,7 @@ public class Facture {
 
     private double tax;
 
-    private int paiements;
+    private Paiement paiements;
     private Commande commande;
 
 
@@ -32,10 +32,9 @@ public class Facture {
 
 
 
-    private List<Produit> produits;  // Liste des produits associés à la facture
 
     // Constructeur
-    public Facture(int id, int clientId, double montant, boolean statut, Date date, double tax, int paiements) {
+    public Facture(int id, int clientId, double montant, boolean statut, Date date, double tax, Paiement paiements) {
         this.id = id;
         this.clientId = clientId;
         this.montant = montant;
