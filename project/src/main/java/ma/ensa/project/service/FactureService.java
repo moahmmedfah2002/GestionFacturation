@@ -139,10 +139,12 @@ str.executeUpdate();
             int idcommande=    rs.getInt("idCommande");
             Date date=    rs.getDate("Date");
             int idpaiement=    rs.getInt("idPaiement");
+            PaimentService paimentService=new PaimentService();
+
             int clientId=    rs.getInt("clientId");
             Commande commande=  commandeService.getCommande(idcommande);
             Paiement paiement= paimentService.getPaiement(idpaiement);
-            Facture facture=new Facture( idfac,  clientId,  montant,  status,  date,  tax,  idpaiement );
+            Facture facture=new Facture( idfac,  clientId,  montant,  status,  date,  tax,  paiement );
             factures.add(facture);
         }
 
