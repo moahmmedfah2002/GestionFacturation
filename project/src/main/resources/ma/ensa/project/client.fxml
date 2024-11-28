@@ -27,7 +27,7 @@
       </TableView>
       <ImageView fitHeight="86.0" fitWidth="68.0" layoutX="167.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/text_13132533.png" />
+            <Image url="@images/text_13132533.png" />
          </image>
       </ImageView>
       <Text layoutX="258.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clients details" wrappingWidth="213.62890625">
@@ -39,7 +39,7 @@
          <graphic>
             <ImageView fitHeight="20" fitWidth="21.0">
                <image>
-                  <Image url="@../../../images/add.png" />
+                  <Image url="@images/add.png" />
                </image>
             </ImageView>
          </graphic>
@@ -51,7 +51,7 @@
          <graphic>
             <ImageView fitHeight="20" fitWidth="21.0">
                <image>
-                  <Image url="@../../../images/update.png" />
+                  <Image url="@images/update.png" />
                </image>
             </ImageView>
          </graphic>
@@ -60,7 +60,7 @@
          <graphic>
             <ImageView fitHeight="20" fitWidth="21.0">
                <image>
-                  <Image url="@../../../images/delete.png" />
+                  <Image url="@images/delete.png" />
                </image>
             </ImageView>
          </graphic>
@@ -69,7 +69,7 @@
          <graphic>
             <ImageView fitHeight="20" fitWidth="21.0">
                <image>
-                  <Image url="@../../../images/close2.png" />
+                  <Image url="@images/close2.png" />
                </image>
             </ImageView>
          </graphic>

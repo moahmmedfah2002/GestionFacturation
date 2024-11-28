@@ -1,12 +1,13 @@
 package ma.ensa.project.entity;
 
-public class user {
+public class User {
     private int id;
     private String nomUtilisateur;
     private String motDePasse;
     private Role typeUser;
-
-    public user(int id, String nomUtilisateur, String motDePasse, Role typeUser) {
+    public User() {
+    }
+    public User(int id, String nomUtilisateur, String motDePasse, Role typeUser) {
         this.id = id;
         this.nomUtilisateur = nomUtilisateur;
         this.motDePasse = motDePasse;

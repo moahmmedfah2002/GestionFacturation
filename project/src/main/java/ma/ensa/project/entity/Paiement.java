@@ -1,5 +1,6 @@
 package ma.ensa.project.entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Paiement {
@@ -50,7 +51,7 @@ public class Paiement {
         this.modepaiement = modepaiement;
     }
 
-    public LocalDate getDatePaiement() {
+    public Date getDatePaiement() {
         return datepaiement;
     }
 

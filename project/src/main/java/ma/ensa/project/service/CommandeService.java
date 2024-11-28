@@ -2,6 +2,8 @@ package ma.ensa.project.service;
 
 import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Commande;
+import ma.ensa.project.entity.DetaileCommande;
+import ma.ensa.project.entity.Produit;
 import ma.ensa.project.repo.CommandeRepo;
 
 import java.sql.Connection;
@@ -21,17 +23,26 @@ public class CommandeService implements CommandeRepo {
 
     }
     @Override
-    public boolean addCommande(Commande commande) throws SQLException {
+    public boolean addCommande(Commande commande,List<DetaileCommande> detaileCommandes) throws SQLException, ClassNotFoundException {
 
         PreparedStatement ps=con.prepareCall("INSERT INTO Commande('date','idClient') VALUES (?,?)");
         ps.setDate(1,commande.getCommandeDate());
         ps.setInt(2,commande.getClient());
+        DetaileCommandeService detaileCommandeService=new DetaileCommandeService();
         int count = ps.executeUpdate();
-        if(count>0){
-            return true;
-        }else {
-            return false;
+        boolean created= count > 0;
+        if(created){
+        for(DetaileCommande detaile:detaileCommandes){
+            int id=ps.getGeneratedKeys().getInt("id");
+            detaile.setIdcommande(id);
+            detaileCommandeService.addDetaileCommande(detaile);
+
         }
+        }
+
+
+        return created;
+
 
 
 
@@ -52,6 +63,7 @@ public class CommandeService implements CommandeRepo {
         }
         return commande;
     }
+
 
     @Override
     public List<Commande> getCommandes() throws SQLException {
@@ -77,6 +89,7 @@ public class CommandeService implements CommandeRepo {
         ps.setFloat(2,commande.getTotalAmount());
         ps.setInt(3,commande.getClient());
         ps.setInt(4,commande.getId());
+
         int count = ps.executeUpdate();
         if(count>0){
             return true;
@@ -86,11 +99,18 @@ public class CommandeService implements CommandeRepo {
     }
 
     @Override
-    public boolean deleteCommande(int id) throws SQLException {
+    public boolean deleteCommande(int id) throws SQLException, ClassNotFoundException {
         PreparedStatement ps=con.prepareCall("Delete from Commande where id=?");
+        PreparedStatement ps1=con.prepareCall("SELECT id from DetailCommande where idCommande=?");
+        ps1.setInt(1,id);
+        ResultSet rs1=ps1.executeQuery();
+        DetaileCommandeService detaileCommandeService=new DetaileCommandeService();
 
-        Commande commande=this.getCommande(id);
-        ps.setInt(1,commande.getId());
+        while(rs1.next()){
+            detaileCommandeService.deleteDetaileCommande(rs1.getInt("id"));
+        }
+
+        ps.setInt(1,id);
         int count = ps.executeUpdate();
         if(count>0){
             return true;
@@ -98,5 +118,36 @@ public class CommandeService implements CommandeRepo {
             return false;
         }
 
+    }
+
+    @Override
+    public List<DetaileCommande> getDetaileCommandesByCommande(int id) throws SQLException {
+
+        con=connexion.getCon();
+        PreparedStatement ps=con.prepareCall("SELECT * from DetaileCommande where idCommande=?");
+        ps.setInt(1,id);
+        ResultSet rs=ps.executeQuery();
+        List<DetaileCommande>detaileCommandes=new ArrayList<DetaileCommande>();
+        while (rs.next()){
+            DetaileCommande detaileCommande=new DetaileCommande();
+            detaileCommande.setId(rs.getInt("id"));
+            detaileCommande.setQuantite(rs.getInt("quantite"));
+            PreparedStatement psP=con.prepareCall("SELECT * from Produit where idProduit=?");
+            psP.setInt(1,detaileCommande.getId());
+            ResultSet rsP=psP.executeQuery();
+            List<Produit> produits=new ArrayList<Produit>();
+            while (rsP.next()){
+                Produit produit=new Produit();
+
+                produit.setNom(rsP.getNString("nom"));
+                produit.setPrix(rsP.getInt("prix"));
+                produit.setId(rsP.getInt("id"));
+                produits.add(produit);
+
+            }
+            detaileCommande.setProduit(produits);
+            detaileCommandes.add(detaileCommande);
+        }
+        return detaileCommandes;
     }
 }

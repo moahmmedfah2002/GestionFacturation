@@ -10,7 +10,7 @@ public class Commande {
     private List<Integer> detailCommande;
 
     public Commande() {}
-    public Commande(int id, Date commandeDate, float totalAmount, int client, List<Integer> detailCommande) {
+    public Commande(int id, Date commandeDate, float totalAmount, int client, List<Integer> detailCommande  ) {
         this.id = id;
         this.commandeDate = commandeDate;
         this.totalAmount = totalAmount;

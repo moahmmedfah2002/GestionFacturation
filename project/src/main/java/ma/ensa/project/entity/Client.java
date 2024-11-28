@@ -1,7 +1,7 @@
 package ma.ensa.project.entity;
 
 
-import ma.ensa.project.Connection;
+import ma.ensa.project.Connexion;
 import ma.ensa.project.repo.ClientRepo;
 
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private Long id;
+    private int id;
     private String nom;
     private String email;
     private String telephone;
@@ -22,7 +22,7 @@ public class Client {
     // Constructeurs
     public Client() {}
 
-    public Client(Long id, String nom, String email, String telephone, String adresse) {
+    public Client(int id, String nom, String email, String telephone, String adresse) {
         this.id = id;
         this.nom = nom;
         this.email = email;
@@ -31,11 +31,11 @@ public class Client {
     }
 
     // Getters et Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
