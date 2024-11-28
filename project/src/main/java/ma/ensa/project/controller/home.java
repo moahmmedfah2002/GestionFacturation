@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import ma.ensa.project.ApplicationGestionFacturation;
 
 import java.io.IOException;
 
@@ -16,6 +19,22 @@ public class home {
     private Stage clientStage = null;
     private Stage productStage = null;
     private Stage factureStage = null;
+
+
+    public void initialize(Stage primaryStage) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("home.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        primaryStage.setTitle("Gestion de stock");
+
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+
+    }
 
     public void showClient() {
         try {
