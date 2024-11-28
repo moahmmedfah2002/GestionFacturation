@@ -25,7 +25,7 @@ public class CommandeService implements CommandeRepo {
     @Override
     public boolean addCommande(Commande commande,List<DetaileCommande> detaileCommandes) throws SQLException, ClassNotFoundException {
 
-        PreparedStatement ps=con.prepareCall("INSERT INTO Commande('date','idClient') VALUES (?,?)");
+        PreparedStatement ps=con.prepareCall("INSERT INTO commande('date','idClient') VALUES (?,?)");
         ps.setDate(1,commande.getCommandeDate());
         ps.setInt(2,commande.getClient());
         DetaileCommandeService detaileCommandeService=new DetaileCommandeService();
@@ -50,7 +50,7 @@ public class CommandeService implements CommandeRepo {
 
     @Override
     public Commande getCommande(int id) throws SQLException {
-        PreparedStatement ps=con.prepareCall("SELECT * from Commande where idCommande=?");
+        PreparedStatement ps=con.prepareCall("SELECT * from commande where idCommande=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
         Commande commande=new Commande();
@@ -67,7 +67,7 @@ public class CommandeService implements CommandeRepo {
 
     @Override
     public List<Commande> getCommandes() throws SQLException {
-        PreparedStatement ps=con.prepareCall("SELECT * from Commande");
+        PreparedStatement ps=con.prepareCall("SELECT * from commande");
         ResultSet rs=ps.executeQuery();
         List<Commande> commandes=new ArrayList<Commande>();
         while(rs.next()){
@@ -83,7 +83,7 @@ public class CommandeService implements CommandeRepo {
 
     @Override
     public boolean updateCommande(Commande commande) throws SQLException {
-        PreparedStatement ps=con.prepareCall("UPDATE Commande set commandedate=?,Totalamount=?,idClient=? where id=?");
+        PreparedStatement ps=con.prepareCall("UPDATE commande set commandedate=?,Totalamount=?,idClient=? where id=?");
 
         ps.setDate(1,commande.getCommandeDate());
         ps.setFloat(2,commande.getTotalAmount());
@@ -101,7 +101,7 @@ public class CommandeService implements CommandeRepo {
     @Override
     public boolean deleteCommande(int id) throws SQLException, ClassNotFoundException {
         PreparedStatement ps=con.prepareCall("Delete from Commande where id=?");
-        PreparedStatement ps1=con.prepareCall("SELECT id from DetailCommande where idCommande=?");
+        PreparedStatement ps1=con.prepareCall("SELECT id from detailCommande where idCommande=?");
         ps1.setInt(1,id);
         ResultSet rs1=ps1.executeQuery();
         DetaileCommandeService detaileCommandeService=new DetaileCommandeService();
@@ -124,7 +124,7 @@ public class CommandeService implements CommandeRepo {
     public List<DetaileCommande> getDetaileCommandesByCommande(int id) throws SQLException {
 
         con=connexion.getCon();
-        PreparedStatement ps=con.prepareCall("SELECT * from DetaileCommande where idCommande=?");
+        PreparedStatement ps=con.prepareCall("SELECT * from detaileCommande where idCommande=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
         List<DetaileCommande>detaileCommandes=new ArrayList<DetaileCommande>();
@@ -132,7 +132,7 @@ public class CommandeService implements CommandeRepo {
             DetaileCommande detaileCommande=new DetaileCommande();
             detaileCommande.setId(rs.getInt("id"));
             detaileCommande.setQuantite(rs.getInt("quantite"));
-            PreparedStatement psP=con.prepareCall("SELECT * from Produit where idProduit=?");
+            PreparedStatement psP=con.prepareCall("SELECT * from produit where idProduit=?");
             psP.setInt(1,detaileCommande.getId());
             ResultSet rsP=psP.executeQuery();
             List<Produit> produits=new ArrayList<Produit>();

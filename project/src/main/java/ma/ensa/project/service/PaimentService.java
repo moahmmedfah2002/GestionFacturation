@@ -26,9 +26,9 @@ public class PaimentService implements PaiementRepo {
         PreparedStatement ps=con.prepareCall("INSERT INTO Paiement(factureId,montant,datepaiement,modepaiement,statutpaiement) values(?,?,?,?,?)");
         ps.setInt(1,paiement.getFactureId());
         ps.setDouble(2,paiement.getMontant());
-        ps.setDate(3,paiement.getDatePaiement());
+        ps.setDate(3,paiement.getDatepaiement());
         ps.setString(4,paiement.getModepaiement());
-        ps.setString(5,paiement.getStatutPaiement());
+        ps.setString(5,paiement.getStatutpaiement());
         return ps.executeUpdate()!=0;
 
     }
@@ -39,9 +39,9 @@ public class PaimentService implements PaiementRepo {
         PreparedStatement ps=con.prepareCall("UPDATE Paiement set factureId=?,montant=?,datepaiement=?,modepaiement=?,statutpaiement=? where id=?");
         ps.setInt(1,paiement.getFactureId());
         ps.setDouble(2,paiement.getMontant());
-        ps.setDate(3,paiement.getDatePaiement());
+        ps.setDate(3,paiement.getDatepaiement());
         ps.setString(4,paiement.getModepaiement());
-        ps.setString(5,paiement.getStatutPaiement());
+        ps.setString(5,paiement.getStatutpaiement());
         ps.setInt(6,paiement.getId());
         return ps.executeUpdate()!=0;
 
@@ -59,7 +59,7 @@ public class PaimentService implements PaiementRepo {
             paiement.setFactureId(rs.getInt("factureId"));
             paiement.setMontant(rs.getDouble("montant"));
             paiement.setModepaiement(rs.getString("modepaiement"));
-            paiement.setStatutPaiement(rs.getString("statutpaiement"));
+            paiement.setStatutpaiement(rs.getString("statutpaiement"));
 
         }
         return paiement;
@@ -78,7 +78,7 @@ public class PaimentService implements PaiementRepo {
             paiement.setFactureId(rs.getInt("factureId"));
             paiement.setMontant(rs.getDouble("montant"));
             paiement.setModepaiement(rs.getString("modepaiement"));
-            paiement.setStatutPaiement(rs.getString("statutpaiement"));
+            paiement.setStatutpaiement(rs.getString("statutpaiement"));
             paiements.add(paiement);
         }
         return paiements;
