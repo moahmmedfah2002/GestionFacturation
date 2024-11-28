@@ -13,7 +13,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="project" options="--add-exports javafx.graphics/com.sun.javafx.tk.quantum=ma.ensa.project" />
+      <module name="project" options="" />
     </option>
   </component>
 </project>
