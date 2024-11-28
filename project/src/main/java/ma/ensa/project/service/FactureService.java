@@ -126,7 +126,7 @@ str.executeUpdate();
     }
 
     @Override
-    public List<Facture> getFactures() throws SQLException {
+    public List<Facture> getFactures() throws SQLException, ClassNotFoundException {
         List<Facture> factures=new ArrayList<Facture>();
         String sql="select * from Facture";
         PreparedStatement str=con.prepareStatement(sql);
