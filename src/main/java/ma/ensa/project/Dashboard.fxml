@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Dashboard" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #f4f4f4;">
+
+    <!-- Barre de navigation -->
+    <top>
+        <HBox style="-fx-background-color: #2A9D8F; -fx-padding: 10px;">
+            <children>
+                <Label text="Gestion des Fermes" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;" />
+                <HBox spacing="20.0" alignment="CENTER_RIGHT">
+                    <children>
+                        <Button text="Accueil" style="-fx-background-color: #ffffff; -fx-text-fill: #2A9D8F;"/>
+                        <Button text="Gestion des Animaux" style="-fx-background-color: #ffffff; -fx-text-fill: #2A9D8F;" />
+                        <Button text="Gestion des Cultures" style="-fx-background-color: #ffffff; -fx-text-fill: #2A9D8F;" />
+                        <Button text="Gestion du Personnel" style="-fx-background-color: #ffffff; -fx-text-fill: #2A9D8F;" />
+                        <Button text="Déconnexion" style="-fx-background-color: #E63946; -fx-text-fill: white;" />
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Section principale -->
+    <center>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20px;">
+            <children>
+                <!-- Statistiques générales -->
+                <HBox spacing="20">
+                    <children>
+                        <VBox alignment="CENTER" style="-fx-background-color: #E9C46A; -fx-padding: 10px; -fx-border-radius: 10; -fx-background-radius: 10;" prefHeight="100" prefWidth="200">
+                            <children>
+                                <Label text="Total Animaux" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                                <Label fx:id="totalAnimauxLabel" text="200" style="-fx-font-size: 24px;" />
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" style="-fx-background-color: #F4A261; -fx-padding: 10px; -fx-border-radius: 10; -fx-background-radius: 10;" prefHeight="100" prefWidth="200">
+                            <children>
+                                <Label text="Total Cultures" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                                <Label fx:id="totalCulturesLabel" text="50 Ha" style="-fx-font-size: 24px;" />
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" style="-fx-background-color: #E76F51; -fx-padding: 10px; -fx-border-radius: 10; -fx-background-radius: 10;" prefHeight="100" prefWidth="200">
+                            <children>
+                                <Label text="Total Personnel" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                                <Label fx:id="totalPersonnelLabel" text="15" style="-fx-font-size: 24px;" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- Tableau des fermes -->
+                <TableView fx:id="fermesTable" prefHeight="400.0" prefWidth="900.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="100.0" />
+                        <TableColumn fx:id="nomColumn" text="Nom de la Ferme" prefWidth="300.0" />
+                        <TableColumn fx:id="localisationColumn" text="Localisation" prefWidth="200.0" />
+                        <TableColumn fx:id="tailleColumn" text="Taille (Ha)" prefWidth="150.0" />
+                        <TableColumn fx:id="responsableColumn" text="Responsable" prefWidth="150.0" />
+                    </columns>
+                </TableView>
+
+                <!-- Actions -->
+                <HBox spacing="10">
+                    <children>
+                        <Button text="Ajouter Ferme" style="-fx-background-color: #2A9D8F; -fx-text-fill: white;" onAction="#handleAddFarm"/>
+                        <Button text="Modifier Ferme" style="-fx-background-color: #F4A261; -fx-text-fill: white;" onAction="#handleEditFarm"/>
+                        <Button text="Supprimer Ferme" style="-fx-background-color: #E63946; -fx-text-fill: white;" onAction="#handleDeleteFarm"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+
+    <!-- Pied de page -->
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-background-color: #264653; -fx-padding: 10px;">
+            <children>
+                <Label text="© 2024 Gestion des Fermes. Tous droits réservés." style="-fx-font-size: 12px; -fx-text-fill: white;" />
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>
