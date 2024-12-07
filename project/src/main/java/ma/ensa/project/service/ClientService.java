@@ -73,16 +73,19 @@ public class ClientService implements ClientRepo {
     }
 
     @Override
-    public void addClient(Client client) throws SQLException {
+    public boolean addClient(Client client,int clientId) throws SQLException {
 
 
-        String sql="insert into Client(name,address,email,telephone) values(?,?,?,?)";
+        String sql="insert into Client(name,address,email,telephone,clientId) values(?,?,?,?,?)";
         PreparedStatement str=con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
-        str.executeUpdate();}
+        str.setInt(5,clientId);
+
+        return str.executeUpdate()>0;
+    }
 
 
 
@@ -90,36 +93,23 @@ public class ClientService implements ClientRepo {
 
 
     @Override
-    public void updateClient(Client client) throws SQLException {
+    public boolean updateClient(Client client) throws SQLException {
      String sql="Update Client set name=?,address=?,email=?,telephone=? where id="+client.getId();
         PreparedStatement str= con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
-        str.executeUpdate();
+        return str.executeUpdate()>0;
 
 
     }
 
     @Override
-    public void deleteClient(int id) throws SQLException {
-        ArrayList<Client> clients=getClients();
-        boolean exist=false;
-        for(Client c:clients){
-            if(c.getId() == id){
-                exist=true;
-            }
-        }
-        if(exist){
-            String sql="delete from Client where id="+id;
-            Statement str=con.createStatement();
-
-            str.execute(sql);}
-        else {
-            throw new SQLException("Client does not exist");
-        }
-
+    public boolean deleteClient(int id) throws SQLException {
+        PreparedStatement PreparedStatement = this.con.prepareStatement("DELETE from user where  id =?");
+        PreparedStatement.setInt(1,id);
+        return PreparedStatement.executeUpdate()>0;
     }
 
     @Override

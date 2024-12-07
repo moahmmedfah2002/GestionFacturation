@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public interface ClientRepo {
     public Client getClient(int id) throws SQLException;
     public ArrayList<Client> getClients() throws SQLException;
-    public void addClient(Client client) throws SQLException;
-    public void updateClient(Client client) throws SQLException;
-    public void deleteClient(int id) throws SQLException;
+    public boolean addClient(Client client,int userId) throws SQLException;
+    public boolean updateClient(Client client) throws SQLException;
+    public boolean deleteClient(int id) throws SQLException;
     public Client getClientByEmailAnd(String email) throws SQLException;
 }
