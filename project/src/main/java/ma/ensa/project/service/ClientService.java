@@ -94,12 +94,13 @@ public class ClientService implements ClientRepo {
 
     @Override
     public boolean updateClient(Client client) throws SQLException {
-     String sql="Update Client set name=?,address=?,email=?,telephone=? where id="+client.getId();
+     String sql="Update Client set name=?,address=?,email=?,telephone=? where id=?"+client.getId();
         PreparedStatement str= con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
+        str.setInt(5,client.getId());
         return str.executeUpdate()>0;
 
 
