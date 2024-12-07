@@ -11,5 +11,5 @@ public interface ClientRepo {
     public boolean addClient(Client client,int userId) throws SQLException;
     public boolean updateClient(Client client) throws SQLException;
     public boolean deleteClient(int id) throws SQLException;
-    public Client getClientByEmailAnd(String email) throws SQLException;
+    public Client getClientByEmail(String email) throws SQLException;
 }

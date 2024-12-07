@@ -39,6 +39,11 @@ public class ClientService implements ClientRepo {
             c.setEmail(email);
             String telephone=rs.getString("telephone");
             c.setTelephone(telephone);
+            int idUser=rs.getInt("idUser");
+            c.setUserId(idUser);
+
+
+
         }
 
         rs.close();
@@ -63,7 +68,8 @@ public class ClientService implements ClientRepo {
             String address=rs.getString("address");
             String email=rs.getString("email");
             String telephone=rs.getString("telephone");
-            Client c=new Client(idclient,name,address,email,telephone);
+            int idUser=rs.getInt("idUser");
+            Client c=new Client(idclient,name,address,email,telephone,idUser);
             clients.add(c);
 
         }
@@ -94,13 +100,14 @@ public class ClientService implements ClientRepo {
 
     @Override
     public boolean updateClient(Client client) throws SQLException {
-     String sql="Update Client set name=?,address=?,email=?,telephone=? where id=?"+client.getId();
+     String sql="Update Client set name=?,address=?,email=?,telephone=? ,idUser=? where id=?"+client.getId();
         PreparedStatement str= con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
-        str.setInt(5,client.getId());
+        str.setInt(5,client.getUserId());
+        str.setInt(6,client.getId());
         return str.executeUpdate()>0;
 
 
@@ -114,7 +121,7 @@ public class ClientService implements ClientRepo {
     }
 
     @Override
-    public Client getClientByEmailAnd(String email) throws SQLException {
+    public Client getClientByEmail(String email) throws SQLException {
         String sql="select * from Client where email=?";
         PreparedStatement str=con.prepareStatement(sql);
         str.setString(1,email);
@@ -131,6 +138,8 @@ public class ClientService implements ClientRepo {
             c.setEmail(emailclient);
             String telephone=rs.getString("telephone");
             c.setTelephone(telephone);
+            int idUser=rs.getInt("idUser");
+            c.setUserId(idUser);
 
         }
         return c;
