@@ -103,25 +103,25 @@ public class FactureService implements FactureRepo {
     }
 
     @Override
-    public void deleteFacture(int id) throws SQLException {
+    public boolean deleteFacture(int id) throws SQLException {
 
         String sql="delete from Facture where idFacture=?";
         PreparedStatement str=con.prepareStatement(sql);
         str.setInt(1,id);
-        str.executeUpdate();
+        return str.executeUpdate()>0;
 
     }
 
     @Override
-    public void updateFacture(Facture facture) throws SQLException {
-String sql="Update Facture set date=?,tax=?,status=?,prixaftertax=? where idFacture=?";
-PreparedStatement str=con.prepareStatement(sql);
-str.setDate(1,facture.getDate());
-str.setDouble(2,facture.getTax());
-str.setBoolean(3,facture.isStatut());
-str.setDouble(4,facture.getMontant());
-str.setInt(5,facture.getId());
-str.executeUpdate();
+    public boolean updateFacture(Facture facture) throws SQLException {
+        String sql="Update Facture set date=?,tax=?,status=?,prixaftertax=? where idFacture=?";
+        PreparedStatement str=con.prepareStatement(sql);
+        str.setDate(1,facture.getDate());
+        str.setDouble(2,facture.getTax());
+        str.setBoolean(3,facture.isStatut());
+        str.setDouble(4,facture.getMontant());
+        str.setInt(5,facture.getId());
+        return str.executeUpdate()>0;
 
     }
 
