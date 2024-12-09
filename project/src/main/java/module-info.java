@@ -7,9 +7,12 @@ module ma.ensa.project {
     requires java.sql;
     requires static lombok;
     requires java.desktop;
+    requires org.testng;
+    requires org.junit.platform.commons;
 
     opens ma.ensa.project to javafx.fxml;
     exports ma.ensa.project;
+    exports ma.ensa.project.test;
     exports ma.ensa.project.controller;
     opens ma.ensa.project.controller to javafx.fxml;
 }

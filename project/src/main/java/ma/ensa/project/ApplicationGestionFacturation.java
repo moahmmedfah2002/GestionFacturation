@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ApplicationGestionFacturation extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        home h=new home();
+        Login h=new Login();
        h.initialize(primaryStage);
     }
 

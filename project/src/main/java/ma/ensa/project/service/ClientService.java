@@ -39,6 +39,11 @@ public class ClientService implements ClientRepo {
             c.setEmail(email);
             String telephone=rs.getString("telephone");
             c.setTelephone(telephone);
+            int idUser=rs.getInt("idUser");
+            c.setUserId(idUser);
+
+
+
         }
 
         rs.close();
@@ -63,7 +68,8 @@ public class ClientService implements ClientRepo {
             String address=rs.getString("address");
             String email=rs.getString("email");
             String telephone=rs.getString("telephone");
-            Client c=new Client(idclient,name,address,email,telephone);
+            int idUser=rs.getInt("idUser");
+            Client c=new Client(idclient,name,address,email,telephone,idUser);
             clients.add(c);
 
         }
@@ -73,16 +79,19 @@ public class ClientService implements ClientRepo {
     }
 
     @Override
-    public void addClient(Client client) throws SQLException {
+    public boolean addClient(Client client,int clientId) throws SQLException {
 
 
-        String sql="insert into Client(name,address,email,telephone) values(?,?,?,?)";
+        String sql="insert into Client(name,address,email,telephone,clientId) values(?,?,?,?,?)";
         PreparedStatement str=con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
-        str.executeUpdate();}
+        str.setInt(5,clientId);
+
+        return str.executeUpdate()>0;
+    }
 
 
 
@@ -90,40 +99,29 @@ public class ClientService implements ClientRepo {
 
 
     @Override
-    public void updateClient(Client client) throws SQLException {
-     String sql="Update Client set name=?,address=?,email=?,telephone=? where id="+client.getId();
+    public boolean updateClient(Client client) throws SQLException {
+     String sql="Update Client set name=?,address=?,email=?,telephone=? ,idUser=? where id=?"+client.getId();
         PreparedStatement str= con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
-        str.executeUpdate();
+        str.setInt(5,client.getUserId());
+        str.setInt(6,client.getId());
+        return str.executeUpdate()>0;
 
 
     }
 
     @Override
-    public void deleteClient(int id) throws SQLException {
-        ArrayList<Client> clients=getClients();
-        boolean exist=false;
-        for(Client c:clients){
-            if(c.getId() == id){
-                exist=true;
-            }
-        }
-        if(exist){
-            String sql="delete from Client where id="+id;
-            Statement str=con.createStatement();
-
-            str.execute(sql);}
-        else {
-            throw new SQLException("Client does not exist");
-        }
-
+    public boolean deleteClient(int id) throws SQLException {
+        PreparedStatement PreparedStatement = this.con.prepareStatement("DELETE from user where  id =?");
+        PreparedStatement.setInt(1,id);
+        return PreparedStatement.executeUpdate()>0;
     }
 
     @Override
-    public Client getClientByEmailAnd(String email) throws SQLException {
+    public Client getClientByEmail(String email) throws SQLException {
         String sql="select * from Client where email=?";
         PreparedStatement str=con.prepareStatement(sql);
         str.setString(1,email);
@@ -140,6 +138,8 @@ public class ClientService implements ClientRepo {
             c.setEmail(emailclient);
             String telephone=rs.getString("telephone");
             c.setTelephone(telephone);
+            int idUser=rs.getInt("idUser");
+            c.setUserId(idUser);
 
         }
         return c;
