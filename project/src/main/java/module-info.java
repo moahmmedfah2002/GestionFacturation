@@ -12,6 +12,7 @@ module ma.ensa.project {
     requires java.mail;
     requires activation;
     requires MaterialFX;
+    requires jbcrypt;
 
 
     opens ma.ensa.project to javafx.fxml;
