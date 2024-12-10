@@ -19,4 +19,6 @@ public class User {
     }
 
 
+    public User(long l, String johnDoe, String mail, String admin, String actif) {
+    }
 }
