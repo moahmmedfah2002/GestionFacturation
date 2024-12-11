@@ -7,6 +7,7 @@ public class Commande {
     private Date commandeDate;
     private float totalAmount;
     private int client;
+
     private List<Integer> detailCommande;
 
     public Commande() {}

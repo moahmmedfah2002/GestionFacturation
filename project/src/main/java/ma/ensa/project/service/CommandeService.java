@@ -127,27 +127,23 @@ public class CommandeService implements CommandeRepo {
         PreparedStatement ps=con.prepareCall("SELECT * from detaileCommande where idCommande=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
-        List<DetaileCommande>detaileCommandes=new ArrayList<DetaileCommande>();
+        List<DetaileCommande> detaileCommandes = new ArrayList<>();
+
         while (rs.next()){
+
             DetaileCommande detaileCommande=new DetaileCommande();
             detaileCommande.setId(rs.getInt("id"));
             detaileCommande.setQuantite(rs.getInt("quantite"));
-            PreparedStatement psP=con.prepareCall("SELECT * from produit where idProduit=?");
-            psP.setInt(1,detaileCommande.getId());
+            PreparedStatement psP=con.prepareCall("SELECT * from produit where id=?");
+            psP.setInt(1,detaileCommande.getIdproduit());
             ResultSet rsP=psP.executeQuery();
-            List<Produit> produits=new ArrayList<Produit>();
             while (rsP.next()){
-                Produit produit=new Produit();
-
-                produit.setNom(rsP.getNString("nom"));
-                produit.setPrix(rsP.getInt("prix"));
-                produit.setId(rsP.getInt("id"));
-                produits.add(produit);
-
+                detaileCommande.setIdproduit(rsP.getInt("id"));
             }
-            detaileCommande.setProduit(produits);
             detaileCommandes.add(detaileCommande);
         }
         return detaileCommandes;
     }
 }
+
+
