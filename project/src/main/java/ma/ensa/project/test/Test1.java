@@ -1,9 +1,18 @@
 package ma.ensa.project.test;
 
+import ma.ensa.project.entity.Permission;
+import ma.ensa.project.entity.PermissionEnum;
+import ma.ensa.project.entity.Role;
+import ma.ensa.project.entity.User;
 import ma.ensa.project.service.MailService;
+import ma.ensa.project.service.UserService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test1 {
 
@@ -17,4 +26,24 @@ public class Test1 {
 
 
     }
+    @Test
+    public void add() throws SQLException, ClassNotFoundException {
+        UserService userService = new UserService();
+        User user = new User();
+        user.setNomUtilisateur("moh");
+        user.setMotDePasse("hi");
+        user.setRole(Role.ADMIN.toString());
+//        Permission permission=new Permission();
+//        permission.setNom(PermissionEnum.CREATE_CLIENT.toString());
+//        Permission permission1=new Permission();
+//        permission1.setNom(PermissionEnum.CREATE_FACTURE.toString());
+
+//        List<Permission> permissions=new ArrayList<Permission>();
+//        permissions.add(permission);
+//        permissions.add(permission1);
+        Assert.assertTrue(userService.login(user));
+
+
+    }
+
 }
