@@ -1,5 +1,6 @@
 package ma.ensa.project.entity;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import lombok.Data;
 
 @Data

@@ -13,6 +13,7 @@ module ma.ensa.project {
     requires activation;
     requires MaterialFX;
     requires jbcrypt;
+    requires com.jfoenix;
 
 
     opens ma.ensa.project to javafx.fxml;
