@@ -3,15 +3,23 @@ package ma.ensa.project.entity;
 public class Produit {
     private int id;
     private String nom;
-    private double prix;
+    private float prix;
     private int quantiteDisponible;
+
+    private int UserId;
+    private float tva;
+
+
+
     public Produit() {
     }
-    public Produit(int id, String nom, double prix, int quantiteDisponible) {
+    public Produit(int id, String nom, float prix, int quantiteDisponible,int UserId, float tva) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
         this.quantiteDisponible = quantiteDisponible;
+        this.UserId=UserId;
+        this.tva=tva;
     }
 
     public boolean verifierDisponibilite(int quantiteDemandee) {
@@ -42,11 +50,11 @@ public class Produit {
         this.nom = nom;
     }
 
-    public double getPrix() {
+    public float getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
 
@@ -56,5 +64,21 @@ public class Produit {
 
     public void setQuantiteDisponible(int quantiteDisponible) {
         this.quantiteDisponible = quantiteDisponible;
+    }
+
+    public float getTva() {
+        return tva;
+    }
+
+    public void setTva(float tva) {
+        this.tva = tva;
+    }
+
+    public int getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(int userId) {
+        this.UserId = userId;
     }
 }

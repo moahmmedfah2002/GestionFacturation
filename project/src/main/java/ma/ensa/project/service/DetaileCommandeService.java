@@ -1,8 +1,8 @@
 package ma.ensa.project.service;
 
 import ma.ensa.project.Connexion;
-import ma.ensa.project.entity.Commande;
 import ma.ensa.project.entity.DetaileCommande;
+import ma.ensa.project.entity.Produit;
 import ma.ensa.project.repo.DetaileCommandeRepo;
 
 import java.sql.Connection;
@@ -22,11 +22,20 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
     }
     @Override
     public boolean addDetaileCommande(DetaileCommande detailecommande) throws SQLException {
-        PreparedStatement ps=con.prepareCall("INSERT INTO DetailCommande(quantite,idCommande)");
+        PreparedStatement ps=con.prepareCall( "INSERT INTO DetailCommande(quantite,idCommande)");
         ps.setInt(1, detailecommande.getQuantite());
         ps.setInt(2,detailecommande.getIdcommande());
         return ps.executeUpdate()!=0;
 
+    }
+
+    @Override
+    public float SommeAvecTva(DetaileCommande detaileCommande) throws SQLException, ClassNotFoundException {
+         ProduitService produitService=new ProduitService();
+         int quantite=detaileCommande.getQuantite();
+         float produit=produitService.CalculTTC(detaileCommande.getIdProduit());
+         float q=produit*quantite;
+         return q;
     }
 
     @Override
