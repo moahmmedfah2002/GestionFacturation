@@ -32,6 +32,15 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
 
 
     @Override
+    public float SommeAvecTva(DetaileCommande detaileCommande) throws SQLException, ClassNotFoundException {
+         ProduitService produitService=new ProduitService();
+         int quantite=detaileCommande.getQuantite();
+         float produit=produitService.CalculTTC(detaileCommande.getIdProduit());
+         float q=produit*quantite;
+         return q;
+    }
+
+    @Override
     public boolean updateDetaileCommande(DetaileCommande detaileCommande) throws SQLException {
         PreparedStatement ps=con.prepareCall("update  DetailCommande values set quantite=?where id=?");
         ps.setInt(1, detaileCommande.getQuantite());

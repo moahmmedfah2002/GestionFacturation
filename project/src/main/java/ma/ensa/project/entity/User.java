@@ -1,5 +1,6 @@
 package ma.ensa.project.entity;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import lombok.Data;
 
 @Data
@@ -26,4 +27,6 @@ public class User {
     }
 
 
+    public User(long l, String johnDoe, String mail, String admin, String actif) {
+    }
 }

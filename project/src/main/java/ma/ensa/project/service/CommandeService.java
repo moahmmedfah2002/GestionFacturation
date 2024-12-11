@@ -35,12 +35,12 @@ public class CommandeService implements CommandeRepo {
         int count = ps.executeUpdate();
         boolean created= count > 0;
         if(created){
-        for(DetaileCommande detaile:detaileCommandes){
-            int id=ps.getGeneratedKeys().getInt("id");
-            detaile.setIdcommande(id);
-            detaileCommandeService.addDetaileCommande(detaile);
+            for(DetaileCommande detaile:detaileCommandes){
+                int id=ps.getGeneratedKeys().getInt("id");
+                detaile.setIdcommande(id);
+                detaileCommandeService.addDetaileCommande(detaile);
 
-        }
+            }
         }
 
 

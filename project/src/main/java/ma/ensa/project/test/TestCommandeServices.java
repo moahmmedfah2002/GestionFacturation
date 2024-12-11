@@ -26,9 +26,9 @@ public class TestCommandeServices {
             clientService.addClient(clientService.getClient(5),13);
             Produit savon = new Produit("savon", 75, 100);
             ProduitService produitService = new ProduitService();
-            produitService.addProduit(savon);
+            produitService.addProduit(savon,5);
             Produit pain = new Produit("pain", 2, 50);
-            produitService.addProduit(pain);
+            produitService.addProduit(pain,5);
             Facture facture = new Facture(1,500, true, sqlDate, 50);
             FactureService factureService = new FactureService();
             factureService.addFacture(facture);
@@ -37,8 +37,8 @@ public class TestCommandeServices {
             UserService userService = new UserService();
             paimentService.addPaiement(paiement,userService.getUser(13));
             Commande commande = new Commande(sqlDate, 200, 5, paiement.getId());
-            DetaileCommande detail = new DetaileCommande(commande.getId(), savon.getId(), 75);
-            DetaileCommande detail2 = new DetaileCommande(commande.getId(), savon.getId(), 75);
+            DetaileCommande detail = new DetaileCommande();
+            DetaileCommande detail2 = new DetaileCommande();
             DetaileCommandeService detaileCommandeService = new DetaileCommandeService();
             detaileCommandeService.addDetaileCommande(detail);
             detaileCommandeService.addDetaileCommande(detail2);
