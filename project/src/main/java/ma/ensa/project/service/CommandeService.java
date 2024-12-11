@@ -1,9 +1,7 @@
 package ma.ensa.project.service;
 
 import ma.ensa.project.Connexion;
-import ma.ensa.project.entity.Commande;
-import ma.ensa.project.entity.DetaileCommande;
-import ma.ensa.project.entity.Produit;
+import ma.ensa.project.entity.*;
 import ma.ensa.project.repo.CommandeRepo;
 
 import java.sql.Connection;
@@ -11,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CommandeService implements CommandeRepo {
@@ -25,9 +24,13 @@ public class CommandeService implements CommandeRepo {
     @Override
     public boolean addCommande(Commande commande,List<DetaileCommande> detaileCommandes) throws SQLException, ClassNotFoundException {
 
-        PreparedStatement ps=con.prepareCall("INSERT INTO commande('date','idClient') VALUES (?,?)");
+        PreparedStatement ps=con.prepareCall("INSERT INTO commande('commandedate','totalamount','idClient','statuePaiement','idPaiement','idUser') VALUES (?,?,?,?,?,?)");
         ps.setDate(1,commande.getCommandeDate());
         ps.setInt(2,commande.getClient());
+        ps.setInt(3, commande.getClient());
+        ps.setInt(4, commande.getStatusPaiement());
+        ps.setInt(5, commande.getIdPaiement());
+        ps.setInt(6, commande.getIdUser());
         DetaileCommandeService detaileCommandeService=new DetaileCommandeService();
         int count = ps.executeUpdate();
         boolean created= count > 0;
@@ -83,12 +86,13 @@ public class CommandeService implements CommandeRepo {
 
     @Override
     public boolean updateCommande(Commande commande) throws SQLException {
-        PreparedStatement ps=con.prepareCall("UPDATE commande set commandedate=?,Totalamount=?,idClient=? where id=?");
+        PreparedStatement ps=con.prepareCall("UPDATE commande set commandedate=?,Totalamount=?,idClient=? , statuePaiement=? where id=?");
 
         ps.setDate(1,commande.getCommandeDate());
         ps.setFloat(2,commande.getTotalAmount());
         ps.setInt(3,commande.getClient());
-        ps.setInt(4,commande.getId());
+        ps.setInt(4,commande.getStatusPaiement());
+        ps.setInt(5,commande.getId());
 
         int count = ps.executeUpdate();
         if(count>0){
@@ -127,25 +131,19 @@ public class CommandeService implements CommandeRepo {
         PreparedStatement ps=con.prepareCall("SELECT * from detaileCommande where idCommande=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
-        List<DetaileCommande>detaileCommandes=new ArrayList<DetaileCommande>();
+        List<DetaileCommande> detaileCommandes = new ArrayList<>();
+
         while (rs.next()){
+
             DetaileCommande detaileCommande=new DetaileCommande();
             detaileCommande.setId(rs.getInt("id"));
             detaileCommande.setQuantite(rs.getInt("quantite"));
-            PreparedStatement psP=con.prepareCall("SELECT * from produit where idProduit=?");
-            psP.setInt(1,detaileCommande.getId());
+            PreparedStatement psP=con.prepareCall("SELECT * from produit where id=?");
+            psP.setInt(1,detaileCommande.getIdProduit());
             ResultSet rsP=psP.executeQuery();
-            List<Produit> produits=new ArrayList<Produit>();
             while (rsP.next()){
-                Produit produit=new Produit();
-
-                produit.setNom(rsP.getNString("nom"));
-                produit.setPrix(rsP.getInt("prix"));
-                produit.setId(rsP.getInt("id"));
-                produits.add(produit);
-
+                detaileCommande.setIdProduit(rsP.getInt("id"));
             }
-            detaileCommande.setProduit(produits);
             detaileCommandes.add(detaileCommande);
         }
         return detaileCommandes;

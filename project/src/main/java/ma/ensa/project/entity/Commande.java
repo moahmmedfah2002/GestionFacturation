@@ -8,9 +8,18 @@ public class Commande {
     private float totalAmount;
     private int client;
     private List<Integer> detailCommande;
+    private int idUser ;
+    private int idPaiement;
+    private int statusPaiement;
+
 
     public Commande() {}
-    public Commande(int id, Date commandeDate, float totalAmount, int client, List<Integer> detailCommande  ) {
+    public Commande(int id, Date commandeDate, float totalAmount, int client, List<Integer> detailCommande ,int idPaiement ) {
+        if(idPaiement!=0){
+            this.statusPaiement=1;
+        }else{
+            this.statusPaiement=0;
+        }
         this.id = id;
         this.commandeDate = commandeDate;
         this.totalAmount = totalAmount;
@@ -19,6 +28,13 @@ public class Commande {
     }
     public int getId() {
         return id;
+    }
+    public int getIdUser(){ return idUser;}
+    public int getIdPaiement() {
+        return idPaiement;
+    }
+    public int getStatusPaiement() {
+        return statusPaiement;
     }
 
     public void setId(int id) {
