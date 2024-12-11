@@ -1,18 +1,29 @@
 package ma.ensa.project.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import ma.ensa.project.ApplicationGestionFacturation;
 import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Paiement;
 import ma.ensa.project.entity.Permission;
 import ma.ensa.project.entity.User;
 import ma.ensa.project.repo.UserRepo;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONString;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserService implements UserRepo {
     private Connexion connection;
@@ -25,14 +36,62 @@ public class UserService implements UserRepo {
     public String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
-    public boolean login(User user) throws SQLException {
+    public boolean login(User user) throws SQLException, IOException {
         PreparedStatement ps=con.prepareCall("SELECT password from user where username=?");
         ps.setString(1,user.getNomUtilisateur());
         ResultSet rs=ps.executeQuery();
+        boolean log=false;
         if(rs.next()){
-            return BCrypt.checkpw(user.getMotDePasse(), rs.getString("password"));
+            log= BCrypt.checkpw(user.getMotDePasse(), rs.getString("password"));
         }
-        else return false;
+        if(log){
+
+            try {
+                PreparedStatement ps1=con.prepareCall("SELECT id,role from user where username=?");
+                ps1.setString(1,user.getNomUtilisateur());
+                ResultSet rs1=ps1.executeQuery();
+
+                if(rs1.next()){
+                    user.setId(rs1.getInt(1));
+                    user.setRole(rs1.getString(2));
+                }
+                // Créer l'ObjectMapper
+                ObjectMapper mapper = new ObjectMapper();
+                String resourceUrl = Objects.requireNonNull(ApplicationGestionFacturation.class.getResource("login/login.json")).toExternalForm();
+
+                System.out.println(resourceUrl.substring(6).replace("/","//"));
+                // Chemin du fichier
+                File jsonFile = new File(resourceUrl.substring(6).replace("/","//"));
+
+                // Créer le nouveau JSON
+                ObjectNode newJson = mapper.createObjectNode();
+                newJson.put("id", user.getId());
+                newJson.put("role", user.getRole());
+
+                // Lire le fichier JSON existant
+                ObjectNode existingJson;
+                if (jsonFile.exists()) {
+                    existingJson = (ObjectNode) mapper.readTree(jsonFile);
+                } else {
+                    existingJson = mapper.createObjectNode();
+                }
+
+                // Vérifier si les valeurs sont différentes
+                if (!((ObjectNode) newJson).equals(existingJson)) {
+                    // Mettre à jour les valeurs
+                    existingJson.put("id", user.getId());
+                    existingJson.put("role", user.getRole());
+
+                    // Écrire dans le fichier
+                    mapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, existingJson);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return log;
 
     }
     @Override
@@ -142,6 +201,21 @@ public class UserService implements UserRepo {
         return user;
 
 
+    }
+    public List<Permission> getUserPermissions(User user) throws SQLException {
+        PreparedStatement ps=this.con.prepareCall("SELECT * from permissions where idUser=?") ;
+        ps.setInt(1,user.getId());
+        ResultSet rs=ps.executeQuery();
+
+        List<Permission> permissions=new ArrayList<>();
+        while(rs.next()){
+            Permission permission=new Permission();
+            permission.setId(rs.getInt("id"));
+            permission.setNom(rs.getString("permission"));
+            permission.setIdUser(rs.getInt("idUser"));
+            permissions.add(permission);
+        }
+        return permissions;
     }
 
     @Override
