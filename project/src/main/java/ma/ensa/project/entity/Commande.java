@@ -14,6 +14,13 @@ public class Commande {
 
 
     public Commande() {}
+    public Commande(Date commandeDate, float totalAmount ) {
+
+
+        this.commandeDate = commandeDate;
+        this.totalAmount = totalAmount;
+    }
+
     public Commande(int id, Date commandeDate, float totalAmount, int client, List<Integer> detailCommande ,int idPaiement ) {
         if(idPaiement!=0){
             this.statusPaiement=1;
@@ -25,6 +32,19 @@ public class Commande {
         this.totalAmount = totalAmount;
         this.client = client;
         this.detailCommande = detailCommande;
+    }
+    //constructeur sans id pour auto increment
+    public Commande(Date commandeDate, float totalAmount, int client,int idPaiement ) {
+        if(idPaiement!=0){
+            this.statusPaiement=1;
+        }else{
+            this.statusPaiement=0;
+        }
+
+        this.commandeDate = commandeDate;
+        this.totalAmount = totalAmount;
+        this.client = client;
+
     }
     public int getId() {
         return id;

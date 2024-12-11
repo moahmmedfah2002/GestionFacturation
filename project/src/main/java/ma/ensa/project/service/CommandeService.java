@@ -24,9 +24,9 @@ public class CommandeService implements CommandeRepo {
     @Override
     public boolean addCommande(Commande commande,List<DetaileCommande> detaileCommandes) throws SQLException, ClassNotFoundException {
 
-        PreparedStatement ps=con.prepareCall("INSERT INTO commande('commandedate','totalamount','idClient','statuePaiement','idPaiement','idUser') VALUES (?,?,?,?,?,?)");
+        PreparedStatement ps=con.prepareCall("INSERT INTO commande (commandedate, totalamount, idClient, statuePaiement, idPaiement, idUser) VALUES (?, ?, ?, ?, ?, ?)\n");
         ps.setDate(1,commande.getCommandeDate());
-        ps.setInt(2,commande.getClient());
+        ps.setFloat(2,commande.getTotalAmount());
         ps.setInt(3, commande.getClient());
         ps.setInt(4, commande.getStatusPaiement());
         ps.setInt(5, commande.getIdPaiement());
@@ -126,8 +126,6 @@ public class CommandeService implements CommandeRepo {
 
     @Override
     public List<DetaileCommande> getDetaileCommandesByCommande(int id) throws SQLException {
-
-        con=connexion.getCon();
         PreparedStatement ps=con.prepareCall("SELECT * from detaileCommande where idCommande=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();

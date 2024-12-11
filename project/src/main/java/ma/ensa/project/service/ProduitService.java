@@ -25,7 +25,7 @@ public class ProduitService implements ProduitRepo {
     @Override
     public void addProduit(Produit p) throws SQLException {
 
-        String sql="Insert into Produit(nom,prix,quantitedisponible)values(?,?,?)";
+        String sql="Insert into Produit(nom,prix,quantitéDisponible)values(?,?,?)";
         PreparedStatement pstmt=con.prepareStatement(sql);
         pstmt.setString(1,p.getNom());
         pstmt.setDouble(2,p.getPrix());

@@ -2,6 +2,7 @@ package ma.ensa.project.service;
 
 import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Paiement;
+import ma.ensa.project.entity.User;
 import ma.ensa.project.repo.PaiementRepo;
 
 import java.sql.Connection;
@@ -21,14 +22,12 @@ public class PaimentService implements PaiementRepo {
         con=connexion.getCon();
     }
     @Override
-    public boolean addPaiement(Paiement paiement) throws SQLException {
+    public boolean addPaiement(Paiement paiement, User user) throws SQLException {
 
-        PreparedStatement ps=con.prepareCall("INSERT INTO Paiement(factureId,montant,datepaiement,modepaiement,statutpaiement) values(?,?,?,?,?)");
-        ps.setInt(1,paiement.getFactureId());
-        ps.setDouble(2,paiement.getMontant());
-        ps.setDate(3,paiement.getDatepaiement());
-        ps.setString(4,paiement.getModepaiement());
-        ps.setString(5,paiement.getStatutpaiement());
+        PreparedStatement ps=con.prepareCall("INSERT INTO Paiement(idCommande,date,idUser) values(?,?,?,?,?,?)");
+        ps.setInt(1,paiement.getCommandeId());
+        ps.setDate(3,paiement.getDate());
+        ps.setInt(4,paiement.getIdUser());
         return ps.executeUpdate()!=0;
 
     }
@@ -36,13 +35,10 @@ public class PaimentService implements PaiementRepo {
 
     @Override
     public boolean updatePaiement(Paiement paiement) throws SQLException {
-        PreparedStatement ps=con.prepareCall("UPDATE Paiement set factureId=?,montant=?,datepaiement=?,modepaiement=?,statutpaiement=? where id=?");
-        ps.setInt(1,paiement.getFactureId());
-        ps.setDouble(2,paiement.getMontant());
-        ps.setDate(3,paiement.getDatepaiement());
-        ps.setString(4,paiement.getModepaiement());
-        ps.setString(5,paiement.getStatutpaiement());
-        ps.setInt(6,paiement.getId());
+        PreparedStatement ps=con.prepareCall("UPDATE Paiement set idCommande=?,date=? where id=?");
+        ps.setInt(1,paiement.getCommandeId());
+        ps.setDate(2,paiement.getDate());
+        ps.setInt(3,paiement.getId());
         return ps.executeUpdate()!=0;
 
     }
@@ -56,10 +52,9 @@ public class PaimentService implements PaiementRepo {
 
         if(rs.next()){
             paiement.setId(rs.getInt("id"));
-            paiement.setFactureId(rs.getInt("factureId"));
-            paiement.setMontant(rs.getDouble("montant"));
-            paiement.setModepaiement(rs.getString("modepaiement"));
-            paiement.setStatutpaiement(rs.getString("statutpaiement"));
+            paiement.setCommandeId(rs.getInt("idCommande"));
+            paiement.setDate(rs.getDate("date"));
+            paiement.setIdUser(rs.getInt("idUser"));
 
         }
         return paiement;
@@ -75,10 +70,9 @@ public class PaimentService implements PaiementRepo {
         while (rs.next()){
             Paiement paiement=new Paiement();
             paiement.setId(rs.getInt("id"));
-            paiement.setFactureId(rs.getInt("factureId"));
-            paiement.setMontant(rs.getDouble("montant"));
-            paiement.setModepaiement(rs.getString("modepaiement"));
-            paiement.setStatutpaiement(rs.getString("statutpaiement"));
+            paiement.setCommandeId(rs.getInt("idCommande"));
+            paiement.setDate(rs.getDate("date"));
+            paiement.setIdUser(rs.getInt("idUser"));
             paiements.add(paiement);
         }
         return paiements;

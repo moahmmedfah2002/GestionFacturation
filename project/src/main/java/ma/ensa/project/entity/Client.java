@@ -32,6 +32,14 @@ public class Client {
         this.adresse = adresse;
         this.userId = userId;
     }
+    //constructeur sans id pour auto increment
+    public Client(String nom, String email, String telephone, String adresse,int userId) {
+        this.nom = nom;
+        this.email = email;
+        this.telephone = telephone;
+        this.adresse = adresse;
+        this.userId = userId;
+    }
 
 
 

@@ -13,6 +13,11 @@ public class Produit {
         this.prix = prix;
         this.quantiteDisponible = quantiteDisponible;
     }
+    public Produit( String nom, double prix, int quantiteDisponible) {
+        this.nom = nom;
+        this.prix = prix;
+        this.quantiteDisponible = quantiteDisponible;
+    }
 
     public boolean verifierDisponibilite(int quantiteDemandee) {
         return quantiteDemandee <= quantiteDisponible;

@@ -6,35 +6,21 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.time.LocalDate;
-@Getter
-@Setter
+@Data
 public class Paiement {
     private int id;
-    private int factureId;
-    private double montant;
-    private Date datepaiement;
-    private String modepaiement;
-    private String statutpaiement;
+    private int commandeId;
+    private int idUser;
+    private Date date;
+
     public Paiement(){}
-    public Paiement(int id, int factureId, double montant, String modePaiement, Date datePaiement, String statutPaiement) {
+    public Paiement(int id, int commandeId, double montant, int idUser, Date datepaiement) {
         this.id = id;
-        this.factureId = factureId;
-        this.montant = montant;
-        this.modepaiement = modepaiement;
-        this.datepaiement = datepaiement;
-        this.statutpaiement = statutpaiement;
+        this.commandeId = commandeId;
+        this.date = datepaiement;
+        this.idUser= idUser;
     }
 
 
 
-    public String toString() {
-        return "Paiement{" +
-                "id=" + id +
-                ", factureId=" + factureId +
-                ", montant=" + montant +
-                ", modePaiement='" + modepaiement + '\'' +
-                ", datePaiement=" + datepaiement +
-                ", statutPaiement='" + statutpaiement + '\'' +
-                '}';
-    }
 }

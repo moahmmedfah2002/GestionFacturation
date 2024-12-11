@@ -16,10 +16,16 @@ public class DetaileCommande {
     public DetaileCommande() {
 
     }
-    public DetaileCommande(int id, int idcommande, Produit produit, int quantite, double prixUnitaire) {
+    public DetaileCommande(int id, int idcommande, int idProduit, int quantite) {
         this.id = id;
         this.idcommande = idcommande;
-        this.idProduit = produit.getId();
+        this.idProduit = idProduit;
+        this.quantite = quantite;
+
+    }
+    public DetaileCommande( int idcommande, int idProduit, int quantite) {
+        this.idcommande = idcommande;
+        this.idProduit = idProduit;
         this.quantite = quantite;
 
     }

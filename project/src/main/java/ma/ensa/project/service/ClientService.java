@@ -78,19 +78,22 @@ public class ClientService implements ClientRepo {
 
     }
 
+
     @Override
-    public boolean addClient(Client client,int clientId) throws SQLException {
+    public boolean addClient(Client client, int clientId) throws SQLException {
+        String sql = "INSERT INTO Client(nom, address, email, telephone, idUser ) VALUES (?, ?, ?, ?, ?)";
 
+        try (PreparedStatement str = con.prepareStatement(sql)) {
+            str.setString(1, client.getNom());
+            str.setString(2, client.getAdresse());
+            str.setString(3, client.getEmail());
+            str.setString(4, client.getTelephone());
+            str.setInt(5, clientId);
 
-        String sql="insert into Client(name,address,email,telephone,clientId) values(?,?,?,?,?)";
-        PreparedStatement str=con.prepareStatement(sql);
-        str.setString(1,client.getNom());
-        str.setString(2,client.getAdresse());
-        str.setString(3,client.getEmail());
-        str.setString(4,client.getTelephone());
-        str.setInt(5,clientId);
-
-        return str.executeUpdate()>0;
+            return str.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new SQLException("Error adding client to the database", e);
+        }
     }
 
 
@@ -100,7 +103,7 @@ public class ClientService implements ClientRepo {
 
     @Override
     public boolean updateClient(Client client) throws SQLException {
-     String sql="Update Client set name=?,address=?,email=?,telephone=? ,idUser=? where id=?"+client.getId();
+        String sql="Update Client set name=?,address=?,email=?,telephone=? ,idUser=? where id=?"+client.getId();
         PreparedStatement str= con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
