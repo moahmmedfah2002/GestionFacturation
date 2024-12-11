@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Test1 {
 
     }
     @Test
-    public void add() throws SQLException, ClassNotFoundException {
+    public void add() throws SQLException, ClassNotFoundException, IOException {
         UserService userService = new UserService();
         User user = new User();
         user.setNomUtilisateur("moh");
@@ -41,7 +42,7 @@ public class Test1 {
 //        List<Permission> permissions=new ArrayList<Permission>();
 //        permissions.add(permission);
 //        permissions.add(permission1);
-        Assert.assertTrue(userService.login(user));
+        Assert.assertEquals(userService.getSession().getId(),31);
 
 
     }

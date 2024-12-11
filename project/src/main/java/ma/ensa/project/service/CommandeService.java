@@ -135,10 +135,10 @@ public class CommandeService implements CommandeRepo {
             detaileCommande.setId(rs.getInt("id"));
             detaileCommande.setQuantite(rs.getInt("quantite"));
             PreparedStatement psP=con.prepareCall("SELECT * from produit where id=?");
-            psP.setInt(1,detaileCommande.getIdproduit());
+            psP.setInt(1,detaileCommande.getIdProduit());
             ResultSet rsP=psP.executeQuery();
             while (rsP.next()){
-                detaileCommande.setIdproduit(rsP.getInt("id"));
+                detaileCommande.setIdProduit(rsP.getInt("id"));
             }
             detaileCommandes.add(detaileCommande);
         }

@@ -87,6 +87,7 @@ public class UserService implements UserRepo {
                 }
 
             } catch (Exception e) {
+
                 e.printStackTrace();
             }
         }
@@ -94,6 +95,18 @@ public class UserService implements UserRepo {
         return log;
 
     }
+    public  User getSession() throws IOException {
+        User user=new User();
+        ObjectMapper mapper = new ObjectMapper();
+        String resourceUrl = Objects.requireNonNull(ApplicationGestionFacturation.class.getResource("login/login.json")).toExternalForm();
+        File jsonFile = new File(resourceUrl.substring(6).replace("/","//"));
+        ObjectNode newJson=mapper.readValue(jsonFile, ObjectNode.class);
+        user.setId(newJson.get("id").asInt());
+        user.setRole(newJson.get("role").asText());
+        return user;
+
+    }
+
     @Override
     public boolean addUser(User user, List<Permission> permissions) throws SQLException {
         String p1=user.getMotDePasse();
