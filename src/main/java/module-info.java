@@ -11,10 +11,19 @@ module ma.ensa.project {
 //    requires org.junit.platform.commons;
     requires java.mail;
     requires activation;
+
     requires MaterialFX;
+    requires jbcrypt;
+    requires com.jfoenix;
+    requires com.fasterxml.jackson.databind;
+    requires org.json;
 
 
     opens ma.ensa.project to javafx.fxml;
+    opens ma.ensa.project.test to org.json;
+
+
+
     exports ma.ensa.project;
     exports ma.ensa.project.entity;
     exports ma.ensa.project.test;

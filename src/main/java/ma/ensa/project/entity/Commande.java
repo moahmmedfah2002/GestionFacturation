@@ -7,6 +7,7 @@ public class Commande {
     private Date commandeDate;
     private float totalAmount;
     private int client;
+
     private List<Integer> detailCommande;
 
     public Commande() {}
@@ -25,7 +26,7 @@ public class Commande {
         this.id = id;
     }
 
-    public java.sql.Date getCommandeDate() {
+    public Date getCommandeDate() {
         return commandeDate;
     }
 

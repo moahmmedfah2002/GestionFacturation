@@ -6,10 +6,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ProduitRepo {
-    void addProduit(Produit p) throws SQLException;
+    boolean addProduit(Produit p, int UserId) throws SQLException;
     void updateProduit(Produit p) throws SQLException;
     void deleteProduit(int id) throws SQLException;
     Produit getProduit(int id) throws SQLException;
+    public float CalculTTC(int id) throws SQLException;
     List<Produit> getAllProduits() throws SQLException;
 
 }

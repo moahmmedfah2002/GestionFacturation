@@ -18,7 +18,7 @@ public class ApplicationGestionFacturation extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("commande.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("dashboarduser.fxml"));
 
 
         Scene scene = new Scene(fxmlLoader.load());

@@ -1,7 +1,6 @@
 package ma.ensa.project.service;
 
 import ma.ensa.project.Connexion;
-
 import ma.ensa.project.entity.Produit;
 import ma.ensa.project.repo.ProduitRepo;
 
@@ -9,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,15 +21,16 @@ public class ProduitService implements ProduitRepo {
     }
 
     @Override
-    public void addProduit(Produit p) throws SQLException {
+    public boolean addProduit(Produit p,int UserId) throws SQLException {
 
-        String sql="Insert into Produit(nom,prix,quantitedisponible)values(?,?,?)";
+        String sql="Insert into Produit(nom,prix,quantitedisponible,idUser,tva)values(?,?,?,?,?)";
         PreparedStatement pstmt=con.prepareStatement(sql);
         pstmt.setString(1,p.getNom());
         pstmt.setDouble(2,p.getPrix());
         pstmt.setInt(3,p.getQuantiteDisponible());
-        pstmt.executeUpdate();
-
+        pstmt.setFloat(4,p.getTva());
+        pstmt.setInt(5,UserId);
+        return pstmt.executeUpdate()!=0;
 
     }
 
@@ -69,12 +68,17 @@ public class ProduitService implements ProduitRepo {
         if (rs.next()) {
           int idpro=  rs.getInt("id");
           p.setId(idpro);
-        String name=    rs.getString("nom");
-        p.setNom(name);
-       double prix=     rs.getDouble("prix");
-       p.setPrix(prix);
-        int quantity=    rs.getInt("quantitedisponible");
-        p.setQuantiteDisponible(quantity);
+          String name=    rs.getString("nom");
+          p.setNom(name);
+          float prix=     rs.getFloat("prix");
+          p.setPrix(prix);
+          int quantity=    rs.getInt("quantitedisponible");
+          p.setQuantiteDisponible(quantity);
+          int idUser=rs.getInt("idUser");
+          p.setUserId(idUser);
+          float tva= rs.getFloat("tva");
+          p.setTva(tva);
+
 
 
         }
@@ -92,12 +96,24 @@ public class ProduitService implements ProduitRepo {
         while (rs.next()) {
             int idpro=  rs.getInt("id");
             String name=    rs.getString("nom");
-            double prix=     rs.getDouble("prix");
+            float prix=     rs.getFloat("prix");
             int quantity=    rs.getInt("quantitedisponible");
-            Produit p=new Produit(idpro,name,quantity,prix);
+            int idUser=rs.getInt("idUser");
+            float tva= rs.getFloat("tva");
+            Produit p=new Produit(idpro,name,prix,quantity,idUser,tva);
             produits.add(p);
         }
         return produits;
+    }
+
+
+    @Override
+    public float CalculTTC(int id) throws SQLException{
+        Produit pr=getProduit(id);
+        float ht=pr.getPrix();
+        float tva=pr.getTva();
+        return ht * (1+tva/100);
+
     }
 }
 

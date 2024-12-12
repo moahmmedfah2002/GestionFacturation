@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ClientService implements ClientRepo {
     private Connexion connection;
-    private java.sql.Connection con;
+    private Connection con;
 
     public ClientService() throws SQLException, ClassNotFoundException {
         connection=new Connexion();
@@ -79,16 +79,16 @@ public class ClientService implements ClientRepo {
     }
 
     @Override
-    public boolean addClient(Client client,int clientId) throws SQLException {
+    public boolean addClient(Client client,int idUser) throws SQLException {
 
 
-        String sql="insert into Client(name,address,email,telephone,clientId) values(?,?,?,?,?)";
+        String sql="insert into client(nom,address,email,telephone,idUser) values(?,?,?,?,?)";
         PreparedStatement str=con.prepareStatement(sql);
         str.setString(1,client.getNom());
         str.setString(2,client.getAdresse());
         str.setString(3,client.getEmail());
         str.setString(4,client.getTelephone());
-        str.setInt(5,clientId);
+        str.setInt(5,idUser);
 
         return str.executeUpdate()>0;
     }

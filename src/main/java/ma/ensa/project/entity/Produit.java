@@ -3,28 +3,42 @@ package ma.ensa.project.entity;
 public class Produit {
     private int id;
     private String nom;
-    private int quantitedisponible;
-    private double prix;
+    private float prix;
+    private int quantiteDisponible;
 
-    // Constructeur sans paramètre
+    private int UserId;
+    private float tva;
+
+
+
     public Produit() {
-        // Ne fait rien
     }
-
-    // Constructeur avec tous les champs
-    public Produit(int id, String nom, int quantitedisponible, double prix) {
+    public Produit(int id, String nom, float prix, int quantiteDisponible,int UserId, float tva) {
         this.id = id;
         this.nom = nom;
-        this.quantitedisponible = quantitedisponible;
         this.prix = prix;
+        this.quantiteDisponible = quantiteDisponible;
+        this.UserId=UserId;
+        this.tva=tva;
     }
 
-    // Getters et setters
+    public boolean verifierDisponibilite(int quantiteDemandee) {
+        return quantiteDemandee <= quantiteDisponible;
+    }
+
+    public void reduireStock(int quantiteVendue) {
+        if (quantiteVendue <= quantiteDisponible) {
+            quantiteDisponible -= quantiteVendue;
+        } else {
+            throw new IllegalArgumentException("Quantité demandée supérieure au stock disponible !");
+        }
+    }
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void     setId(int id) {
         this.id = id;
     }
 
@@ -36,19 +50,35 @@ public class Produit {
         this.nom = nom;
     }
 
-    public int getQuantiteDisponible() {
-        return quantitedisponible;
-    }
-
-    public void setQuantiteDisponible(int quantite) {
-        this.quantitedisponible = quantite;
-    }
-
-    public double getPrix() {
+    public float getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
+    }
+
+    public int getQuantiteDisponible() {
+        return quantiteDisponible;
+    }
+
+    public void setQuantiteDisponible(int quantiteDisponible) {
+        this.quantiteDisponible = quantiteDisponible;
+    }
+
+    public float getTva() {
+        return tva;
+    }
+
+    public void setTva(float tva) {
+        this.tva = tva;
+    }
+
+    public int getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(int userId) {
+        this.UserId = userId;
     }
 }
