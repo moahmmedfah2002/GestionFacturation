@@ -3,7 +3,6 @@ package ma.ensa.project.service;
 import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Commande;
 import ma.ensa.project.entity.DetaileCommande;
-import ma.ensa.project.entity.Produit;
 import ma.ensa.project.repo.CommandeRepo;
 
 import java.sql.Connection;

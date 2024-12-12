@@ -1,19 +1,14 @@
 package ma.ensa.project.test;
 
-import ma.ensa.project.entity.Permission;
-import ma.ensa.project.entity.PermissionEnum;
 import ma.ensa.project.entity.Role;
 import ma.ensa.project.entity.User;
 import ma.ensa.project.service.MailService;
 import ma.ensa.project.service.UserService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Test1 {
 
