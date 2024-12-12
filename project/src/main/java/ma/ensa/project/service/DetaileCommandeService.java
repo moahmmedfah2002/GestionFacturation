@@ -28,6 +28,8 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
 
     }
 
+
+
     @Override
     public float SommeAvecTva(DetaileCommande detaileCommande) throws SQLException, ClassNotFoundException {
          ProduitService produitService=new ProduitService();

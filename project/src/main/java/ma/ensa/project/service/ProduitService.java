@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProduitService implements ProduitRepo {
-  private Connexion connection;
-  private Connection con;
+    private Connexion connection;
+    private Connection con;
 
     public ProduitService() throws SQLException, ClassNotFoundException {
-      connection=new Connexion();
-      con=connection.getCon();
+        connection=new Connexion();
+        con=connection.getCon();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ProduitService implements ProduitRepo {
 
         PreparedStatement str=con.prepareStatement(sql);
         str.setInt(1,id);
-        
+
 
     }
 
@@ -66,18 +66,18 @@ public class ProduitService implements ProduitRepo {
         ResultSet rs=str.executeQuery();
         Produit p=new Produit();
         if (rs.next()) {
-          int idpro=  rs.getInt("id");
-          p.setId(idpro);
-          String name=    rs.getString("nom");
-          p.setNom(name);
-          float prix=     rs.getFloat("prix");
-          p.setPrix(prix);
-          int quantity=    rs.getInt("quantitedisponible");
-          p.setQuantiteDisponible(quantity);
-          int idUser=rs.getInt("idUser");
-          p.setUserId(idUser);
-          float tva= rs.getFloat("tva");
-          p.setTva(tva);
+            int idpro=  rs.getInt("id");
+            p.setId(idpro);
+            String name=    rs.getString("nom");
+            p.setNom(name);
+            float prix=     rs.getFloat("prix");
+            p.setPrix(prix);
+            int quantity=    rs.getInt("quantitedisponible");
+            p.setQuantiteDisponible(quantity);
+            int idUser=rs.getInt("idUser");
+            p.setUserId(idUser);
+            float tva= rs.getFloat("tva");
+            p.setTva(tva);
 
 
 
@@ -116,4 +116,3 @@ public class ProduitService implements ProduitRepo {
 
     }
 }
-

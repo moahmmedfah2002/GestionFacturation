@@ -50,21 +50,21 @@ public class FactureService implements FactureRepo {
         Facture facture=new Facture();
 
         if(rs.next()){
-           int idfac= rs.getInt("idFacture");
-           facture.setId(idfac);
-           Date date= rs.getDate("date");
-           facture.setDate(date);
-           int tax=   rs.getInt("tax");
-           facture.setTax(tax);
-           boolean status=   rs.getBoolean("status");
-           facture.setStatut(status);
-           float prixaftertax=  rs.getFloat("prixaftertax");
-           facture.setMontant(prixaftertax);
-           int idpaiement=rs.getInt("idPaiement");
-           Commande commandes=getCommandeForFacture(id);
-           facture.setCommande(commandes);
-           Paiement paiement= paimentService.getPaiement(idpaiement);
-           facture.setPaiements(paiement);
+            int idfac= rs.getInt("idFacture");
+            facture.setId(idfac);
+            Date date= rs.getDate("date");
+            facture.setDate(date);
+            int tax=   rs.getInt("tax");
+            facture.setTax(tax);
+            boolean status=   rs.getBoolean("status");
+            facture.setStatut(status);
+            float prixaftertax=  rs.getFloat("prixaftertax");
+            facture.setMontant(prixaftertax);
+            int idpaiement=rs.getInt("idPaiement");
+            Commande commandes=getCommandeForFacture(id);
+            facture.setCommande(commandes);
+            Paiement paiement= paimentService.getPaiement(idpaiement);
+            facture.setPaiements(paiement);
 
 
         }
@@ -80,24 +80,24 @@ public class FactureService implements FactureRepo {
         str.setInt(1,idFacture);
         ResultSet rs=str.executeQuery();
         int commandeids = 0;
-       if (rs.next()){
-             commandeids=rs.getInt("idCommande");
+        if (rs.next()){
+            commandeids=rs.getInt("idCommande");
 
         }
 
 
-            String s="select * from Commande where id=?";
-            PreparedStatement st=con.prepareStatement(s);
-            st.setInt(1,commandeids);
-            ResultSet rst=st.executeQuery();
-            Commande c=new Commande();
-            if (rst.next()) {
-                c.setId(rst.getInt("idCommande"));
-                c.setCommandeDate(rst.getDate("Date"));
-                c.setTotalAmount(rst.getFloat("TotalAmount"));
-            }
+        String s="select * from Commande where id=?";
+        PreparedStatement st=con.prepareStatement(s);
+        st.setInt(1,commandeids);
+        ResultSet rst=st.executeQuery();
+        Commande c=new Commande();
+        if (rst.next()) {
+            c.setId(rst.getInt("idCommande"));
+            c.setCommandeDate(rst.getDate("Date"));
+            c.setTotalAmount(rst.getFloat("TotalAmount"));
+        }
 
-            return c;
+        return c;
 
 
     }
@@ -148,7 +148,7 @@ public class FactureService implements FactureRepo {
             factures.add(facture);
         }
 
-                return factures;
+        return factures;
 
     }
 }

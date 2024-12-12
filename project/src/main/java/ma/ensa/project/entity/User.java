@@ -17,6 +17,13 @@ public class User {
         this.role = typeUser;
 
     }
+    public User(String nomUtilisateur, String motDePasse, String typeUser) {
+
+        this.nomUtilisateur = nomUtilisateur;
+        this.motDePasse = motDePasse;
+        this.role = typeUser;
+
+    }
 
 
     public User(long l, String johnDoe, String mail, String admin, String actif) {

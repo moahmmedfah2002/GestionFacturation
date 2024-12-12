@@ -42,6 +42,15 @@ public class Facture {
         this.tax = tax;
         this.paiements = paiements;
     }
+    public Facture(int clientId, double montant, boolean statut, Date date, double tax) {
+
+        this.clientId = clientId;
+        this.montant = montant;
+        this.statut = statut;
+        this.date = date;
+        this.tax = tax;
+
+    }
 
 
 

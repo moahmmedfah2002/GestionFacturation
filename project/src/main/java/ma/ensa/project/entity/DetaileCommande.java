@@ -7,17 +7,23 @@ public class DetaileCommande {
 
     private int id;                    // Identifiant unique du détail de commande
     private int idcommande;         // Commande associée
-    private int  IdProduit;           // Produit associé à ce détail
-    private int quantite;// Quantité commandée
+    private int idProduit;           // Produit associé à ce détail
+    private int quantite;              // Quantité commandée
 
     // Constructeur
     public DetaileCommande() {
 
     }
-    public DetaileCommande(int id, int idcommande, int Idproduit, int quantite, double prixUnitaire) {
+    public DetaileCommande(int id, int idcommande, int idProduit, int quantite) {
         this.id = id;
         this.idcommande = idcommande;
-        this.IdProduit = Idproduit;
+        this.idProduit = idProduit;
+        this.quantite = quantite;
+
+    }
+    public DetaileCommande( int idcommande, int idProduit, int quantite) {
+        this.idcommande = idcommande;
+        this.idProduit = idProduit;
         this.quantite = quantite;
 
     }
