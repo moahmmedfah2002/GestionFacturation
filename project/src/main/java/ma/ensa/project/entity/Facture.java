@@ -1,10 +1,9 @@
 package ma.ensa.project.entity;
 
 import lombok.Data;
-import lombok.Getter;
 
 import java.sql.Date;
-import java.util.List;
+
 @Data
 public class Facture {
     // Getters et Setters

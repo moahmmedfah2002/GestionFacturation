@@ -1,6 +1,5 @@
 package ma.ensa.project.repo;
 
-import ma.ensa.project.entity.Commande;
 import ma.ensa.project.entity.DetaileCommande;
 
 import java.sql.SQLException;

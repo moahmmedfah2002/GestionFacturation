@@ -62,7 +62,7 @@ public class Commande {
         this.id = id;
     }
 
-    public java.sql.Date getCommandeDate() {
+    public Date getCommandeDate() {
         return commandeDate;
     }
 

@@ -1,7 +1,6 @@
 package ma.ensa.project.service;
 
 import ma.ensa.project.Connexion;
-
 import ma.ensa.project.entity.Produit;
 import ma.ensa.project.repo.ProduitRepo;
 
@@ -9,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.List;
 

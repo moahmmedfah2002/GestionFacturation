@@ -1,10 +1,11 @@
 package ma.ensa.project.test;
 
+
+import ma.ensa.project.entity.Role;
 import ma.ensa.project.entity.User;
 import ma.ensa.project.service.UserService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 
 import java.sql.SQLException;
 

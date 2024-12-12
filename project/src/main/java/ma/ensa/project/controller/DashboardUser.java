@@ -3,17 +3,21 @@ package ma.ensa.project.controller;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.application.Platform;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import ma.ensa.project.entity.User;
 import ma.ensa.project.service.UserService;
 import org.kordamp.bootstrapfx.BootstrapFX;
@@ -21,9 +25,6 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.SimpleStringProperty;
 
 public class DashboardUser {
 

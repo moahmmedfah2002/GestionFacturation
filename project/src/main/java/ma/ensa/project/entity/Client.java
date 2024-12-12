@@ -2,13 +2,6 @@ package ma.ensa.project.entity;
 
 
 import lombok.Data;
-import ma.ensa.project.Connexion;
-import ma.ensa.project.repo.ClientRepo;
-
-
-import java.util.ArrayList;
-
-
 
 import java.util.List;
 @Data
