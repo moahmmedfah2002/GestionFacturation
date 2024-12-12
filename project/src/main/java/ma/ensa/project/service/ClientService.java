@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ClientService implements ClientRepo {
     private Connexion connection;
-    private java.sql.Connection con;
+    private Connection con;
 
     public ClientService() throws SQLException, ClassNotFoundException {
         connection=new Connexion();

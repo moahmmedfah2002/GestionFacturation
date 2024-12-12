@@ -8,12 +8,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class MailService {
     public boolean send(String to, String subject, String m,String file) {
@@ -32,8 +27,8 @@ public class MailService {
         props.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                new Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(user,password);
                     }
                 });

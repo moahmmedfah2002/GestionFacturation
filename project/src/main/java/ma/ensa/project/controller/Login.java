@@ -13,7 +13,6 @@ import javafx.stage.StageStyle;
 import ma.ensa.project.ApplicationGestionFacturation;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class Login {
     private VBox root;
