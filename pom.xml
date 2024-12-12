@@ -4,12 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ma.ensa</groupId>
-    <artifactId>project</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>project</name>
-
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -21,6 +15,10 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <groupId>ma.ensa</groupId>
+    <artifactId>project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>project</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
