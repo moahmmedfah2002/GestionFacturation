@@ -3,21 +3,22 @@ package ma.ensa.project.controller;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TreeItem;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.stage.StageStyle;
+import ma.ensa.project.ApplicationGestionFacturation;
 import ma.ensa.project.entity.User;
 import ma.ensa.project.service.UserService;
 import org.kordamp.bootstrapfx.BootstrapFX;
@@ -25,6 +26,9 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
 
 public class DashboardUser {
 
@@ -110,7 +114,8 @@ public class DashboardUser {
     }
 
 
-    public DashboardUser() throws SQLException, ClassNotFoundException {
+    public DashboardUser() throws SQLException, ClassNotFoundException, IOException {
+
         userDao = new UserService();
         userList = FXCollections.observableArrayList();
         userTable.getColumns().add(idColumn);
@@ -209,7 +214,25 @@ public class DashboardUser {
 
     }
     @FXML
-    public void initialize() throws IOException, SQLException {
+    public void initialize(Scene scene) throws IOException, SQLException {
+
+
+
+        Stage primaryStage =new Stage();
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setTitle("Gestion de stock");
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.setFullScreen(true);
+
+
+
+        primaryStage.show();
+
+
         userTable.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         userTable.getStyleClass().addAll("table-view","table table-striped");
 

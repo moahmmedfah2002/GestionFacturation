@@ -18,22 +18,9 @@ public class ApplicationGestionFacturation extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("dashboarduser.fxml"));
-
-
-        Scene scene = new Scene(fxmlLoader.load());
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setTitle("Gestion de stock");
-        scene.setFill(Color.TRANSPARENT);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.setFullScreen(true);
-
-
-
-        primaryStage.show();
+       
+        Login login = new Login();
+        login.initialize(primaryStage);
     }
 
     public static void main(String[] args) {
